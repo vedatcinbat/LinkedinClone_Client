@@ -1,15 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react"
+import { BrowserRouter as Router, Route, Switch, Routes } from 'react-router-dom';
+import LoginPage from "./pages/Auth/LoginPage"
+import Layout from "./pages/layouts/Layout.tsx";
+import Home from "./pages/Home/HomePage.tsx";
 
-function App() {
-  const [count, setCount] = useState(0)
 
+const App: React.FC = () => {
   return (
-    <>
-      <h1>Hello TS</h1>
-    </>
+    <Router>
+        <Layout>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<LoginPage />} />
+            </Routes>
+        </Layout>
+    </Router>
   )
 }
 
