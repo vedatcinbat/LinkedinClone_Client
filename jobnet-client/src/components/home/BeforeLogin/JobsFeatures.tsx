@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PlatformFeatures: React.FC = () => {
+const JobsFeatures: React.FC  = () => {
     return (
         <div className="w-full bg-light-dark flex justify-start items-center font-bold font-arial
         smallPhone:h-[30vh] smallPhone:px-2 smallPhone:py-1
@@ -9,12 +9,11 @@ const PlatformFeatures: React.FC = () => {
         laptop:h-[60vh] laptop:px-8 laptop:py-4
         desktop:h-[70vh] desktop:px-12 desktop:py-6
         ">
-           <div className="bg-light-light w-full h-[30rem]">
-               Platform Features
-           </div>
+            <div className="bg-light-light w-full h-[30rem]">
+                Jobs Features
+            </div>
         </div>
-    );
+    )
 }
 
-
-export default PlatformFeatures;
+export default JobsFeatures;

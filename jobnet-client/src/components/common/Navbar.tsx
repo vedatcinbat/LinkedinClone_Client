@@ -29,6 +29,9 @@ const Navbar: React.FC = () => {
                 <div className={`nav-link mr-6 ${getTextColor('/login')}`}>
                     <Link to="/login">Login</Link>
                 </div>
+                <div className={`nav-link mr-6 ${getTextColor('/signup')}`}>
+                    <Link to="/signup">Signup</Link>
+                </div>
             </div>
         </div>
     );

@@ -14,7 +14,6 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
             <main className="w-full main-content">
                 {children}
             </main>
-
         </div>
     )
 }
