@@ -1,61 +1,56 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+
+import axios from 'axios';
 import {UserSignupRequest} from "../../types/UserSignupRequest.ts";
 import {UserSignupApiRequest} from "../../types/UserSignupApiRequest.ts";
 import {CoreApiPath} from "../../types/CoreApiUris.ts";
-import {useState} from "react";
-import axios from "axios";
 
 const SignupPage: React.FC = () => {
-
-    const UserSignupApiRequest: UserSignupApiRequest = {
-        firstname: "",
-        lastname: "",
-        hashedPassword: "",
-        title: null,
-        email: "",
-        age: "0",
-        country: "",
-        currentLanguage: "",
-        profilePictureUrl: null,
-        aboutMe: null,
-        companyId: null
-    }
-
-    const UserSignupRequest: UserSignupRequest = {
-        firstname: "",
-        lastname: "",
-        email: "",
-        password: "",
-        passwordAgain: "",
+    const initialSignupRequest: UserSignupRequest = {
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+        passwordAgain: '',
         age: 0,
-        country: "",
-        currentLanguage: "",
-        gender: "",
-    }
+        country: '',
+        currentLanguage: '',
+        gender: '',
+    };
 
-    const [signupRequest, setSignupRequest] = useState<UserSignupRequest>(UserSignupRequest);
-    const [signupApiRequest, setSignupApiRequest] = useState<UserSignupApiRequest>(UserSignupApiRequest);
+    const [signupRequest, setSignupRequest] = useState<UserSignupRequest>(initialSignupRequest);
     const [showAlerts, setShowAlerts] = useState<boolean>(false);
+    const [apiResponseStatus, setApiResponseStatus] = useState<string>('');
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = event.target;
-        setSignupRequest(prevState => ({
+        setSignupRequest((prevState: any) => ({
             ...prevState,
             [name]: value,
         }));
     };
 
     const createUser = async () => {
-        if(signupRequest.password !== signupRequest.passwordAgain){
-            alert("Passwords do not match");
+        if (signupRequest.password !== signupRequest.passwordAgain) {
+            alert('Passwords do not match');
             return;
         }
-        if(signupRequest.firstname === '' || signupRequest.lastname === '' || signupRequest.email === '' || signupRequest.password === '' || signupRequest.passwordAgain === '' || signupRequest.age === 0 || signupRequest.country === '' || signupRequest.currentLanguage === '' || signupRequest.gender === '') {
-            alert("Please fill all fields");
+        if (
+            signupRequest.firstname === '' ||
+            signupRequest.lastname === '' ||
+            signupRequest.email === '' ||
+            signupRequest.password === '' ||
+            signupRequest.passwordAgain === '' ||
+            signupRequest.age === 0 ||
+            signupRequest.country === '' ||
+            signupRequest.currentLanguage === '' ||
+            signupRequest.gender === ''
+        ) {
+            alert('Please fill all fields');
             return;
         }
 
-        setSignupApiRequest({
+        const signupApiRequest: UserSignupApiRequest = {
             firstname: signupRequest.firstname,
             lastname: signupRequest.lastname,
             hashedPassword: signupRequest.password,
@@ -66,31 +61,45 @@ const SignupPage: React.FC = () => {
             currentLanguage: signupRequest.currentLanguage,
             profilePictureUrl: null,
             aboutMe: null,
-            companyId: null
-        });
+            companyId: null,
+        };
 
-        axios.post(`${CoreApiPath.url}/api/users/createUser`, signupApiRequest)
-            .then(res => {
-                console.log(res.data);
-                alert(res.data);
+        try {
+            const response = await axios.post(`${CoreApiPath.url}/api/users/createUser`, signupApiRequest);
+            setApiResponseStatus(response.data.statusText);
+            setShowAlerts(true);
+            setTimeout(() => {
+                setShowAlerts(false);
+            }, 3000);
+        } catch (error) {
+            // @ts-ignore
+            if (error.response && error.response.status === 400) {
+                setApiResponseStatus('Bad Request');
                 setShowAlerts(true);
                 setTimeout(() => {
                     setShowAlerts(false);
                 }, 3000);
-            }).catch(e => {
-            console.log(e);
-        })
+            } else {
+                console.error('Error creating user:', error);
+                // Handle other errors here
+            }
+        }
     };
 
-
     return (
-        <div className="signupContainer w-[100%] h-[90vh] flex justify-center align-center items-center font-bold font-arial  bg-light-white">
+        <div
+            className="signupContainer w-[100%] h-[90vh] flex justify-center align-center items-center font-bold font-arial  bg-light-white">
             <div className="alerts absolute bottom-2 right-2">
-                {showAlerts &&
+                {showAlerts && (
                     <div>
-                        <p className="text-light-white bg-light-primary p-2 rounded-lg">User created successfully</p>
+                        {apiResponseStatus === 'Bad Request' ? (
+                            <p className="text-light-white bg-light-secondary p-2 rounded-lg">User cannot be created</p>
+                        ) : (
+                            <p className="text-light-white bg-light-primary p-2 rounded-lg">User created
+                                successfully</p>
+                        )}
                     </div>
-                }
+                )}
             </div>
             <div className="signupForm bg-light-dark
             flex flex-col justify-center mt-2
