@@ -35,6 +35,7 @@ const SignupPage: React.FC = () => {
 
     const [signupRequest, setSignupRequest] = useState<UserSignupRequest>(UserSignupRequest);
     const [signupApiRequest, setSignupApiRequest] = useState<UserSignupApiRequest>(UserSignupApiRequest);
+    const [showAlerts, setShowAlerts] = useState<boolean>(false);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = event.target;
@@ -44,7 +45,7 @@ const SignupPage: React.FC = () => {
         }));
     };
 
-    const createUser = () => {
+    const createUser = async () => {
         if(signupRequest.password !== signupRequest.passwordAgain){
             alert("Passwords do not match");
             return;
@@ -53,6 +54,7 @@ const SignupPage: React.FC = () => {
             alert("Please fill all fields");
             return;
         }
+
         setSignupApiRequest({
             firstname: signupRequest.firstname,
             lastname: signupRequest.lastname,
@@ -70,18 +72,26 @@ const SignupPage: React.FC = () => {
         axios.post(`${CoreApiPath.url}/api/users/createUser`, signupApiRequest)
             .then(res => {
                 console.log(res.data);
-                alert("User created successfully");
+                alert(res.data);
+                setShowAlerts(true);
+                setTimeout(() => {
+                    setShowAlerts(false);
+                }, 3000);
             }).catch(e => {
-                console.log(e);
+            console.log(e);
         })
-
-
-
     };
 
 
     return (
         <div className="signupContainer w-[100%] h-[90vh] flex justify-center align-center items-center font-bold font-arial  bg-light-white">
+            <div className="alerts absolute bottom-2 right-2">
+                {showAlerts &&
+                    <div>
+                        <p className="text-light-white bg-light-primary p-2 rounded-lg">User created successfully</p>
+                    </div>
+                }
+            </div>
             <div className="signupForm bg-light-dark
             flex flex-col justify-center mt-2
             smallPhone:w-[20vh] smallPhone:h-[50vh] smallPhone:p-2 smallPhone:rounded-md
