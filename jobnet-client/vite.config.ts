@@ -1,13 +1,12 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import path from "path"
+import react from "@vitejs/plugin-react"
+import { defineConfig } from "vite"
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      // Add an alias for @mui/icons-material/svg-icons to handle SVG imports
-      '@mui/icons-material/svg-icons': '@mui/icons-material/esm/svg-icons',
+      "@": path.resolve(__dirname, "./src"),
     },
   },
 })

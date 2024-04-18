@@ -1,9 +1,22 @@
 import React, { useState } from 'react';
-
 import axios from 'axios';
 import {UserSignupRequest} from "../../types/UserSignupRequest.ts";
 import {UserSignupApiRequest} from "../../types/UserSignupApiRequest.ts";
 import {CoreApiPath} from "../../types/CoreApiUris.ts";
+import { Button } from "@/components/ui/button"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Input } from "@/components/ui/input"
+//@ts-ignore
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+import {RocketIcon} from "@radix-ui/react-icons";
 
 const SignupPage: React.FC = () => {
     const initialSignupRequest: UserSignupRequest = {
@@ -23,14 +36,17 @@ const SignupPage: React.FC = () => {
     const [apiResponseStatus, setApiResponseStatus] = useState<string>('');
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const { name, value } = event.target;
-        setSignupRequest((prevState: any) => ({
-            ...prevState,
-            [name]: value,
-        }));
+        event.preventDefault();
+        setSignupRequest(prevState => {
+            return {
+                ...prevState,
+                [event.target.id]: event.target.value
+            };
+        });
     };
 
     const createUser = async () => {
+        console.log(signupRequest);
         if (signupRequest.password !== signupRequest.passwordAgain) {
             alert('Passwords do not match');
             return;
@@ -93,127 +109,70 @@ const SignupPage: React.FC = () => {
                 {showAlerts && (
                     <div>
                         {apiResponseStatus === 'Bad Request' ? (
-                            <p className="text-light-white bg-light-secondary p-2 rounded-lg">User cannot be created</p>
+                            <Alert className="bg-alertErrorBgColor text-alertErrorTextColor">
+                                <RocketIcon className="h-4 w-4" />
+                                <AlertTitle>Bad Request</AlertTitle>
+                                <AlertDescription>
+                                    User already exists with this email.
+                                </AlertDescription>
+                            </Alert>
                         ) : (
-                            <p className="text-light-white bg-light-primary p-2 rounded-lg">User created
-                                successfully</p>
+                            <Alert className="bg-alertSuccessBgColor text-alertSuccessTextColor">
+                                <RocketIcon className="h-4 w-4" />
+                                <AlertTitle>Successful</AlertTitle>
+                                <AlertDescription>
+                                    User created successfully.
+                                </AlertDescription>
+                            </Alert>
                         )}
                     </div>
                 )}
             </div>
-            <div className="signupForm bg-light-dark
-            flex flex-col justify-center mt-2
+            <div className="signupForm bg-formBgColor border border-formBorderColor
+            flex flex-col mt-2 gap-2 justify-between
             smallPhone:w-[20vh] smallPhone:h-[50vh] smallPhone:p-2 smallPhone:rounded-md
             phone:w-[40vh] phone:h-[50vh] phone:p-4 phone:rounded-md
-            tablet:w-[60vh] tablet:h-[80vh] tablet:p-6 tablet:rounded-md
-            laptop:w-[80vh] laptop:h-[80vh] laptop:p-8 laptop:rounded-md
-            desktop:w-[90vh] desktop:h-[90vh] desktop:p-12 desktop:rounded-md
+            tablet:w-[60vh] tablet:h-[80vh] tablet:p-6 tablet:rounded-lg
+            laptop:w-[80vh] laptop:h-[80vh] laptop:p-8 laptop:rounded-xl
+            desktop:w-[90vh] desktop:h-[90vh] desktop:p-10 desktop:rounded-2xl
             ">
-                <div className="inputArea flex justify-between items-center p-1">
-                    <label className="text-light-white mr-2
-                    smallPhone:text-xs
-                    phone:text-sm
-                    tablet:text-md
-                    laptop:text-lg
-                    desktop:text-xl
-                    w-[40%]
-                    ">Firstname</label>
-                    <input onChange={handleInputChange} name="firstname" type="text" className="p-3 w-full rounded-lg"/>
+                <div className="fullName flex justify-between w-full">
+                    <div className="w-full flex-1 mr-2 flex justify-center items-center gap-1.5 text-formTextColor">
+                        <Input onChange={handleInputChange} className="p-8 rounded-xl" type="text" id="firstname" placeholder="Firstname"/>
+                    </div>
+                    <div className="w-full flex-1 flex justify-center items-center gap-1.5 text-formTextColor">
+                        <Input onChange={handleInputChange} className="p-8 rounded-xl" type="text" id="lastname" placeholder="Lastname"/>
+                    </div>
                 </div>
-                <div className="inputArea flex justify-between items-center p-1">
-                    <label className="text-light-white mr-2
-                    smallPhone:text-xs
-                    phone:text-sm
-                    tablet:text-md
-                    laptop:text-lg
-                    desktop:text-xl
-                    w-[40%]
-                    ">Lastname</label>
-                    <input onChange={handleInputChange} type="text" name="lastname" className="p-3 w-full rounded-lg"/>
+                <div className="w-full flex justify-center items-center gap-1.5 text-formTextColor">
+                    <Input onChange={handleInputChange} className="p-8 rounded-xl" type="email" id="email" placeholder="Email"/>
                 </div>
-                <div className="inputArea flex justify-between items-center p-1">
-                    <label className="text-light-white mr-2
-                    smallPhone:text-xs
-                    phone:text-sm
-                    tablet:text-md
-                    laptop:text-lg
-                    desktop:text-xl
-                    w-[40%]
-                    ">Email</label>
-                    <input onChange={handleInputChange} type="email" name="email" className="p-3 w-full rounded-lg"/>
+                <div className="w-full flex justify-center items-center gap-1.5 text-formTextColor">
+                    <Input onChange={handleInputChange} className="p-8 rounded-xl" type="text" id="password" placeholder="Password"/>
                 </div>
-                <div className="inputArea flex justify-between items-center p-1">
-                    <label className="text-light-white mr-2
-                    smallPhone:text-xs
-                    phone:text-sm
-                    tablet:text-md
-                    laptop:text-lg
-                    desktop:text-xl
-                    w-[40%]
-                    ">Password</label>
-                    <input onChange={handleInputChange} type="text" name="password" className="p-3 w-full rounded-lg"/>
+                <div className="w-full flex justify-center items-center gap-1.5 text-formTextColor">
+                    <Input onChange={handleInputChange} className="p-8 rounded-xl" type="text" id="passwordAgain" placeholder="Password Again"/>
                 </div>
-                <div className="inputArea flex justify-between items-center p-1">
-                    <label className="text-light-white mr-2
-                    smallPhone:text-xs
-                    phone:text-sm
-                    tablet:text-md
-                    laptop:text-lg
-                    desktop:text-xl
-                    w-[40%]
-                    ">Password Again</label>
-                    <input onChange={handleInputChange} type="text" name="passwordAgain"
-                           className="p-3 w-full rounded-lg "/>
+                <div className="w-full flex justify-center items-center gap-1.5 text-formTextColor">
+                    <Input onChange={handleInputChange} className="p-8 rounded-xl" type="number" id="age" placeholder="Age"/>
                 </div>
-                <div className="inputArea flex justify-between items-center p-1">
-                    <label className="text-light-white mr-2
-                    smallPhone:text-xs
-                    phone:text-sm
-                    tablet:text-md
-                    laptop:text-lg
-                    desktop:text-xl
-                    w-[40%]
-                    ">Age</label>
-                    <input onChange={handleInputChange} type="number" name="age" className="p-3 w-full rounded-lg "/>
+                <div className="w-full flex justify-center items-center gap-1.5 text-formTextColor">
+                    <Input onChange={handleInputChange} className="p-8 rounded-xl" type="text" id="country" placeholder="Country"/>
                 </div>
-                <div className="inputArea flex justify-between items-center p-1">
-                    <label className="text-light-white mr-2
-                    smallPhone:text-xs
-                    phone:text-sm
-                    tablet:text-md
-                    laptop:text-lg
-                    desktop:text-xl
-                    w-[40%]
-                    ">Country</label>
-                    <input onChange={handleInputChange} type="text" name="country" className="p-3 w-full rounded-lg"/>
+                <div className="w-full flex justify-center items-center gap-1.5 text-formTextColor">
+                    <Input onChange={handleInputChange} className="p-8 rounded-xl" type="text" id="currentLanguage" placeholder="Current Language"/>
                 </div>
-                <div className="inputArea flex justify-between items-center p-1">
-                    <label className="text-light-white mr-2
-                    smallPhone:text-xs
-                    phone:text-sm
-                    tablet:text-md
-                    laptop:text-lg
-                    desktop:text-xl
-                    w-[40%]
-                    ">Current Language</label>
-                    <input onChange={handleInputChange} type="text" name="currentLanguage"
-                           className="p-3 w-full rounded-lg"/>
-                </div>
-                <div className="inputArea flex justify-between items-center p-1">
-                    <label className="text-light-white mr-2
-                    smallPhone:text-xs
-                    phone:text-sm
-                    tablet:text-md
-                    laptop:text-lg
-                    desktop:text-xl
-                    w-[40%]
-                    ">Gender</label>
-                    <input onChange={handleInputChange} type="text" name="gender" className="p-3 w-full rounded-lg"/>
+                <div className="w-full flex justify-center items-center gap-1.5 text-formTextColor">
+                    <Input onChange={handleInputChange} className="p-8 rounded-xl" type="text" id="gender" placeholder="Gender"/>
                 </div>
                 <div className="inputArea flex justify-center items-center p-1">
-                    <button onClick={createUser}
-                            className="w-[30%] h-[8vh] p-2 bg-light-primary text-light-dark rounded-lg">Signup
-                    </button>
+                    <Button onClick={createUser}
+                            className="
+                            w-[25%] p-4 rounded-xl text-formBtnTextColor bg-formBtnColor
+                            hover:text-formBtnHoverTextColor hover:bg-formBtnHoverColor"
+                    >
+                        Signup
+                    </Button>
                 </div>
             </div>
         </div>

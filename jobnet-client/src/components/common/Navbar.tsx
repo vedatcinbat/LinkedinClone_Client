@@ -3,21 +3,22 @@ import {Link, useLocation} from "react-router-dom";
 
 const Navbar: React.FC = () => {
     const location = useLocation();
+
     const getTextColor = (path: string) => {
         if(path === location.pathname) {
-            return "text-light-currentPage";
+            return "text-currentPageTextColor";
         }else {
             return "text-dark";
         }
     }
     return (
-        <div className="
+        <div className="text-navbarTextColor
         navbar flex justify-between items-center font-myriad
-        smallPhone:text-xs smallPhone:p-1 smallPhone:bg-light-primary smallPhone:h-[3vh]
-        phone:text-sm phone:p-1 phone:bg-light-primary phone:h-[4vh]
-        tablet:text-md tablet:p-2 tablet:bg-light-primary tablet:h-[5vh]
-        laptop:text-lg laptop:p-3 laptop:bg-light-primary laptop:h-[6vh]
-        desktop:text-xl desktop:p-4 desktop:bg-light-primary desktop:h-[8vh]"
+        smallPhone:text-xs smallPhone:p-1 smallPhone:bg-navbarBgColor smallPhone:h-[3vh]
+        phone:text-sm phone:p-1 phone:bg-navbarBgColor phone:h-[4vh]
+        tablet:text-md tablet:p-2 tablet:bg-navbarBgColor tablet:h-[5vh]
+        laptop:text-lg laptop:p-3 laptop:bg-navbarBgColor laptop:h-[6vh]
+        desktop:text-xl desktop:p-4 desktop:bg-navbarBgColor desktop:h-[8vh]"
         >
             <div className="logo">
                 <div className="font-bold smallPhone:text-md phone:text-lg tablet:text-xl laptop:text-2xl desktop:text-3xl">JobSphere</div>
