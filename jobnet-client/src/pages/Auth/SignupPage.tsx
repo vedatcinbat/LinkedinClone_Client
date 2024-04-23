@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {UserSignupRequest} from "../../types/UserSignupRequest.ts";
-import {UserSignupApiRequest} from "../../types/UserSignupApiRequest.ts";
-import {CoreApiPath} from "../../types/CoreApiUris.ts";
+import {UserSignupRequest} from "@/types/types.ts";
+import {UserSignupApiRequest} from "@/types/types.ts";
+import {CoreApiPath} from "@/types/enums.ts";
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Input } from "@/components/ui/input"
-//@ts-ignore
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
 import {RocketIcon} from "@radix-ui/react-icons";
 
 const SignupPage: React.FC = () => {
@@ -46,7 +36,6 @@ const SignupPage: React.FC = () => {
     };
 
     const createUser = async () => {
-        console.log(signupRequest);
         if (signupRequest.password !== signupRequest.passwordAgain) {
             alert('Passwords do not match');
             return;
@@ -83,6 +72,7 @@ const SignupPage: React.FC = () => {
         try {
             const response = await axios.post(`${CoreApiPath.url}/api/users/createUser`, signupApiRequest);
             setApiResponseStatus(response.data.statusText);
+            setSignupRequest(initialSignupRequest);
             setShowAlerts(true);
             setTimeout(() => {
                 setShowAlerts(false);
@@ -95,6 +85,7 @@ const SignupPage: React.FC = () => {
                 setTimeout(() => {
                     setShowAlerts(false);
                 }, 3000);
+                setSignupRequest(initialSignupRequest);
             } else {
                 console.error('Error creating user:', error);
                 // Handle other errors here
@@ -104,7 +95,7 @@ const SignupPage: React.FC = () => {
 
     return (
         <div
-            className="signupContainer w-[100%] h-[90vh] flex justify-center align-center items-center font-bold font-arial  bg-light-white">
+            className="signupContainer w-[100%] h-[90vh] flex justify-center align-center items-center font-bold font-arial bg-mainBgColor border border-formBorderColor overflow-hidden rounded-lg">
             <div className="alerts absolute bottom-2 right-2">
                 {showAlerts && (
                     <div>
@@ -128,42 +119,42 @@ const SignupPage: React.FC = () => {
                     </div>
                 )}
             </div>
-            <div className="signupForm bg-formBgColor border border-formBorderColor
-            flex flex-col mt-2 gap-2 justify-between
+            <div className="signupForm bg-formBgColor border border-formBorderColor overflow-hidden
+            flex flex-col mt-2 gap-2
             smallPhone:w-[20vh] smallPhone:h-[50vh] smallPhone:p-2 smallPhone:rounded-md
             phone:w-[40vh] phone:h-[50vh] phone:p-4 phone:rounded-md
-            tablet:w-[60vh] tablet:h-[80vh] tablet:p-6 tablet:rounded-lg
-            laptop:w-[80vh] laptop:h-[80vh] laptop:p-8 laptop:rounded-xl
-            desktop:w-[90vh] desktop:h-[90vh] desktop:p-10 desktop:rounded-2xl
+            tablet:w-[60vh] tablet:h-[80vh] tablet:p-2 tablet:rounded-lg
+            laptop:w-[80vh] laptop:h-[85vh] laptop:p-2 laptop:rounded-xl
+            desktop:w-[90vh] desktop:max-h-[80vh] desktop:p-3 desktop:rounded-2xl
             ">
-                <div className="fullName flex justify-between w-full">
+                <div className="fullName flex justify-between w-full h-[8vh]">
                     <div className="w-full flex-1 mr-2 flex justify-center items-center gap-1.5 text-formTextColor">
-                        <Input onChange={handleInputChange} className="p-8 rounded-xl" type="text" id="firstname" placeholder="Firstname"/>
+                        <Input value={signupRequest.firstname} onChange={handleInputChange} className="h-[8vh] rounded-xl" type="text" id="firstname" placeholder="Firstname"/>
                     </div>
                     <div className="w-full flex-1 flex justify-center items-center gap-1.5 text-formTextColor">
-                        <Input onChange={handleInputChange} className="p-8 rounded-xl" type="text" id="lastname" placeholder="Lastname"/>
+                        <Input value={signupRequest.lastname} onChange={handleInputChange} className="h-[8vh] rounded-xl" type="text" id="lastname" placeholder="Lastname"/>
                     </div>
                 </div>
                 <div className="w-full flex justify-center items-center gap-1.5 text-formTextColor">
-                    <Input onChange={handleInputChange} className="p-8 rounded-xl" type="email" id="email" placeholder="Email"/>
+                    <Input value={signupRequest.email} onChange={handleInputChange} className="h-[8vh] rounded-xl" type="email" id="email" placeholder="Email"/>
                 </div>
                 <div className="w-full flex justify-center items-center gap-1.5 text-formTextColor">
-                    <Input onChange={handleInputChange} className="p-8 rounded-xl" type="text" id="password" placeholder="Password"/>
+                    <Input value={signupRequest.password} onChange={handleInputChange} className="h-[8vh] rounded-xl" type="text" id="password" placeholder="Password"/>
                 </div>
                 <div className="w-full flex justify-center items-center gap-1.5 text-formTextColor">
-                    <Input onChange={handleInputChange} className="p-8 rounded-xl" type="text" id="passwordAgain" placeholder="Password Again"/>
+                    <Input value={signupRequest.passwordAgain} onChange={handleInputChange} className="h-[8vh] rounded-xl" type="text" id="passwordAgain" placeholder="Password Again"/>
                 </div>
                 <div className="w-full flex justify-center items-center gap-1.5 text-formTextColor">
-                    <Input onChange={handleInputChange} className="p-8 rounded-xl" type="number" id="age" placeholder="Age"/>
+                    <Input value={signupRequest.age} onChange={handleInputChange} className="h-[8vh] rounded-xl" type="number" id="age" placeholder="Age"/>
                 </div>
                 <div className="w-full flex justify-center items-center gap-1.5 text-formTextColor">
-                    <Input onChange={handleInputChange} className="p-8 rounded-xl" type="text" id="country" placeholder="Country"/>
+                    <Input value={signupRequest.country} onChange={handleInputChange} className="h-[8vh] rounded-xl" type="text" id="country" placeholder="Country"/>
                 </div>
                 <div className="w-full flex justify-center items-center gap-1.5 text-formTextColor">
-                    <Input onChange={handleInputChange} className="p-8 rounded-xl" type="text" id="currentLanguage" placeholder="Current Language"/>
+                    <Input value={signupRequest.currentLanguage} onChange={handleInputChange} className="h-[8vh] rounded-xl" type="text" id="currentLanguage" placeholder="Current Language"/>
                 </div>
                 <div className="w-full flex justify-center items-center gap-1.5 text-formTextColor">
-                    <Input onChange={handleInputChange} className="p-8 rounded-xl" type="text" id="gender" placeholder="Gender"/>
+                    <Input value={signupRequest.gender} onChange={handleInputChange} className="h-[8vh] rounded-xl" type="text" id="gender" placeholder="Gender"/>
                 </div>
                 <div className="inputArea flex justify-center items-center p-1">
                     <Button onClick={createUser}

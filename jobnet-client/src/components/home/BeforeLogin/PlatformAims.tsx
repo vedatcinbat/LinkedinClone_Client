@@ -2,7 +2,7 @@ import React from 'react';
 
 const PlatformAims: React.FC = () => {
     return (
-        <div className="w-full flex justify-start items-center font-bold font-arial
+        <div className="w-full flex justify-start items-center font-bold font-arial text-white bg-formBgColor rounded-2xl
         smallPhone:h-[30vh] smallPhone:px-2 smallPhone:py-1
         phone:h-[40vh] phone:px-4 phone:py-2
         tablet:h-[50vh] tablet:px-6 tablet:py-3

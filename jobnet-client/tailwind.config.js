@@ -25,6 +25,8 @@ module.exports = {
       'desktop': '1280px',
     },
     colors: {
+      "white": "#ffffff",
+      "black": "#000000",
       "mainBgColor": "#2a2a2a",
       "navbarBgColor": "#1a1a1a",
       "navbarTextColor": "#b2b1b1",
