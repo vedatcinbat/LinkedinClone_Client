@@ -1,9 +1,11 @@
 // Request Types
 //@ts-ignore
-interface UserLoginRequest {
+/*
+* interface UserLoginRequest {
     email: string;
     password: string;
 }
+* */
 export interface UserSignupRequest {
     firstname: string;
     lastname: string;
@@ -31,12 +33,24 @@ export interface UserSignupApiRequest {
     companyId: number | null;
 }
 
+export interface UserCredentials {
+    email: string;
+    password: string;
+}
+
 // Response Types
 
 
 
 
 // Types
+export interface AuthState {
+    userId: number | null;
+    isLoggedIn: boolean;
+    accessToken: string | null;
+    refreshToken: string | null;
+    expirationTime: number | null;
+}
 
 import { CompanyIndustry, PostType, SkillIndustry } from './enums';
 
