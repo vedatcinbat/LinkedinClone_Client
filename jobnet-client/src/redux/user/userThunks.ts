@@ -11,7 +11,7 @@ export const fetchUserData = createAsyncThunk(
     'user/fetchUserData',
     async (userId: string, { dispatch, rejectWithValue }) => {
         try {
-            const response = await axios.get<User>(`${API_BASE_URL}/users/${userId}/profile`);
+            const response = await axios.get<User>(`${API_BASE_URL}/users/${userId}/simple`);
             console.log(response);
             const userData: User = response.data;
 

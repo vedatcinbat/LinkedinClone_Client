@@ -43,6 +43,8 @@ module.exports = {
       "alertSuccessTextColor": "#1e1e1e",
       "alertErrorBgColor": "#fa8383",
       "alertErrorTextColor": "#f1f1f1",
+      "sidebarBgColor": "#121212",
+      "sidebarBorderColor": "#5b5b5b",
     },
     fontSize: {
       "xs": ".75rem",

@@ -4,10 +4,12 @@ import {Button} from "@/components/ui/button.tsx";
 import {useDispatch} from "react-redux";
 import {loginUser} from "@/redux/auth/authThunks.ts";
 import {UserCredentials} from "@/types/types.ts";
+import {useLocation} from "react-router-dom";
 
 
 const LoginPage: React.FC = () => {
     const dispatch = useDispatch();
+    const location = useLocation();
     const [formData, setFormData] = useState<UserCredentials>({ email: '', password: '' });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -24,6 +26,7 @@ const LoginPage: React.FC = () => {
         e.preventDefault();
         //@ts-ignore
         dispatch(loginUser(formData))
+        location.pathname = "/";
     };
 
 

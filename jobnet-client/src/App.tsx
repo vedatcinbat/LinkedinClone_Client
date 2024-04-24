@@ -6,6 +6,7 @@ import Home from "./pages/Home/HomePage.tsx";
 import SignupPage from "./pages/Auth/SignupPage.tsx";
 import {useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
+import UserHomePage from "@/pages/Home/UserHomePage.tsx";
 
 const App: React.FC = () => {
     const isUserLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -23,7 +24,7 @@ const App: React.FC = () => {
         ) : (
             <Layout>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<UserHomePage />} />
                 </Routes>
             </Layout>
         )}
