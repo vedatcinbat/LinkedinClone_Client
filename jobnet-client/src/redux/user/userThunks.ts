@@ -12,7 +12,6 @@ export const fetchUserData = createAsyncThunk(
     async (userId: string, { dispatch, rejectWithValue }) => {
         try {
             const response = await axios.get<User>(`${API_BASE_URL}/users/${userId}/simple`);
-            console.log(response);
             const userData: User = response.data;
 
             dispatch(setCurrentUser(userData));

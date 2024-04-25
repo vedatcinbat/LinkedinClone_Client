@@ -8,11 +8,17 @@ import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert.tsx";
 import {RocketIcon} from "@radix-ui/react-icons";
 
 const UserHomePage = () => {
-    const currentUserAuthData= useSelector((state: RootState) => state.auth);
+    /*
+    * const currentUserAuthData= useSelector((state: RootState) => state.auth);
+
+     */
     const currentUserData = useSelector((state: RootState) => state.user.currentUser);
-    const isLoading = useSelector((state: RootState) => state.auth.loading);
-    console.log(currentUserAuthData);
+    const currentUserAuthData = useSelector((state: RootState) => state.auth);
     console.log(currentUserData);
+    console.log(currentUserAuthData);
+
+    const isLoading = useSelector((state: RootState) => state.auth.loading);
+
     return (
         <div className="w-full min-h-screen flex flex-row">
             {isLoading ? (

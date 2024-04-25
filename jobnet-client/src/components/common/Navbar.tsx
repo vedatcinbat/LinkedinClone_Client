@@ -3,10 +3,12 @@ import {Link, useLocation} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import {logoutUser} from "@/redux/auth/authThunks.ts";
 import {RootState} from "@/redux/store.ts";
+import {Button} from "@/components/ui/button.tsx";
 
 const Navbar: React.FC = () => {
     const isUserLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
     const dispatch = useDispatch();
+    const accessToken = localStorage.getItem('accessToken');
 
     const handleLogout = () => {
         // @ts-ignore
@@ -36,7 +38,9 @@ const Navbar: React.FC = () => {
         desktop:text-xl desktop:p-4 desktop:bg-navbarBgColor desktop:h-[8vh]"
                 >
                     <div className="logo">
-                        <div className="font-bold smallPhone:text-md phone:text-lg tablet:text-xl laptop:text-2xl desktop:text-3xl">JobSphere</div>
+                        <div className="font-bold smallPhone:text-md phone:text-lg tablet:text-xl laptop:text-2xl desktop:text-3xl">
+                            <Link to="/">JobSphere</Link>
+                        </div>
                     </div>
                     <div className="nav-links flex p-2 mr-2">
                         <div className={`nav-link mr-6 ${getTextColor('/')}`}>
@@ -47,13 +51,6 @@ const Navbar: React.FC = () => {
                         </div>
                         <div className={`nav-link mr-6 ${getTextColor('/signup')}`}>
                             <Link to="/signup">Signup</Link>
-                        </div>
-                        <div className="userLogout">
-                            {isUserLoggedIn && (
-                                <li>
-                                    <button onClick={handleLogout}>Logout</button>
-                                </li>
-                            )}
                         </div>
                     </div>
                 </div>
@@ -67,18 +64,19 @@ const Navbar: React.FC = () => {
             >
                 <div className="logo">
                     <div
-                        className="font-bold smallPhone:text-md phone:text-lg tablet:text-xl laptop:text-2xl desktop:text-3xl">JobSphere
+                        className="font-bold smallPhone:text-md phone:text-lg tablet:text-xl laptop:text-2xl desktop:text-3xl">
+                        <Link to="/">JobSphere</Link>
                     </div>
                 </div>
-                <div className="nav-links flex p-2 mr-2">
-                    <div className={`nav-link mr-6 ${getTextColor('/')}`}>
+                <div className="nav-links flex mr-2">
+                    <div className={`nav-link p-1 ${getTextColor('/')} hover:text-navbarTextColor`}>
                         <Link to="/">Home</Link>
                     </div>
-                    <div className="userLogout">
-                        {isUserLoggedIn && (
-                            <li>
-                                <button onClick={handleLogout}>Logout</button>
-                            </li>
+                    <div className="userLogout ml-8">
+                        {accessToken && (
+                            <div className="">
+                                <button className="hover:bg-alertSuccessBgColor hover:text-sidebarBgColor hover:rounded-2xl p-2 bg-navbarBgColor text-formBtnTextColor text-sm" onClick={handleLogout}>Logout</button>
+                            </div>
                         )}
                     </div>
                 </div>
