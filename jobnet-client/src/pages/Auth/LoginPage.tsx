@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,13 +7,10 @@ import { UserCredentials } from "@/types/types.ts";
 import { useLocation } from "react-router-dom";
 import { RocketIcon } from "@radix-ui/react-icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert.tsx";
-import {setLoading} from "@/redux/auth/authSlice.ts";
 
 const LoginPage: React.FC = () => {
     const dispatch = useDispatch();
     const location = useLocation();
-    //@ts-ignore
-    let isLoading = useSelector((state) => state.auth.loading);
     // @ts-ignore
     const isErrorExists = useSelector((state) => state.auth.error);
 
