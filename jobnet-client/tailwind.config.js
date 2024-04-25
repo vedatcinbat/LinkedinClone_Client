@@ -40,6 +40,7 @@ module.exports = {
       "formBtnHoverColor": "#686767",
       "formBtnHoverTextColor": "#d7d4d4",
       "alertSuccessBgColor": "#93fa83",
+      "alertSuccess2BgColor": "#62fb4c",
       "alertSuccessTextColor": "#1e1e1e",
       "alertErrorBgColor": "#fa8383",
       "alertErrorTextColor": "#f1f1f1",

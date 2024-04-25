@@ -50,6 +50,8 @@ export interface AuthState {
     accessToken: string | null;
     refreshToken: string | null;
     expirationTime: number | null;
+    loading: false | true;
+    error: string | null;
 }
 
 import { CompanyIndustry, PostType, SkillIndustry } from './enums';

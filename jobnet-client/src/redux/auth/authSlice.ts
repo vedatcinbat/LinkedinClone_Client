@@ -8,6 +8,8 @@ const initialState: AuthState = {
     accessToken: null,
     refreshToken: null,
     expirationTime: null,
+    loading: false,
+    error: null,
 };
 
 const authSlice = createSlice({
@@ -27,10 +29,20 @@ const authSlice = createSlice({
             state.accessToken = null;
             state.refreshToken = null;
             state.expirationTime = null;
+            state.loading = false;
+        },
+        setLoading(state, action: PayloadAction<boolean>) {
+            state.loading = action.payload;
+        },
+        setError(state, action: PayloadAction<string | null>) {
+            state.error = action.payload;
+        },
+        clearError(state) {
+            state.error = null;
         },
     },
 });
 
-export const { loginSuccess, logoutSuccess } = authSlice.actions;
+export const { loginSuccess, logoutSuccess, setLoading, setError, clearError } = authSlice.actions;
 
 export default authSlice.reducer;
