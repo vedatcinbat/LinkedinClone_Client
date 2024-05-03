@@ -10,7 +10,7 @@ const UserSimpleProfileSidebar = () => {
     const currentUserData: User | null = useSelector((state: RootState) => state.user.currentUser);
 
     return (
-        <div className="w-[40vh] h-[65vh] mt-10 bg-mainBgColor sticky top-[10vh] left-[3vh] rounded-xl flex flex-col justify-evenly items-center p-2 border border-sidebarBorderColor">
+        <div className="w-[40vh] h-[65vh] bg-mainBgColor mt-2 ml-2 rounded-xl flex flex-col justify-evenly items-center p-2 border border-sidebarBorderColor">
             <div className="profilePictureContainer bg-sidebarBgColor w-full h-[30%] rounded-2xl mb-2 flex justify-center items-center border border-b-alertSuccessTextColor">
                 {currentUserData?.profilePictureUrl !== null ? (
                     <>

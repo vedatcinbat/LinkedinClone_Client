@@ -35,7 +35,7 @@ const UserHomePage = () => {
                     <div className="userSimpleDataSidebar min-h-screen w-[60vh]">
                         <UserSimpleProfileSidebar/>
                     </div>
-                    <div className="userMainContent w-full bg-alertErrorBgColor">
+                    <div className="userMainContent w-full bg-mainBgColor">
                         <UserHomeMainContent/>
                     </div>
                 </>
