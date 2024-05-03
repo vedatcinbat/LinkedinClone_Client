@@ -1,3 +1,4 @@
+//@ts-ignore
 import React from "react";
 import {RootState} from "@/redux/store.ts";
 import {useSelector} from "react-redux";
@@ -43,8 +44,8 @@ const UserSimpleProfileSidebar = () => {
             <div className="seeProfileButton w-full flex justify-center mt-4">
                 <Button
                     className="rounded-xl text-md text-formBtnTextColor bg-formBtnColor hover:text-formBtnHoverTextColor hover:bg-formBtnHoverColor p-2">
-                    <Link to='/random'>
-                        My Profile
+                    <Link to='/my-profile'>
+                        Profile
                     </Link>
                 </Button>
             </div>

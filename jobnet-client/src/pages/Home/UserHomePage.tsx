@@ -9,13 +9,9 @@ import {RocketIcon} from "@radix-ui/react-icons";
 
 const UserHomePage = () => {
     /*
-    * const currentUserAuthData= useSelector((state: RootState) => state.auth);
-
-     */
-    const currentUserData = useSelector((state: RootState) => state.user.currentUser);
-    const currentUserAuthData = useSelector((state: RootState) => state.auth);
-    console.log(currentUserData);
-    console.log(currentUserAuthData);
+        const currentUserData = useSelector((state: RootState) => state.user.currentUser);
+        const currentUserAuthData = useSelector((state: RootState) => state.auth);
+    */
 
     const isLoading = useSelector((state: RootState) => state.auth.loading);
 

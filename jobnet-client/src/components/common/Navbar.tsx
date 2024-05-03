@@ -3,6 +3,7 @@ import {Link, useLocation} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import {logoutUser} from "@/redux/auth/authThunks.ts";
 import {RootState} from "@/redux/store.ts";
+//@ts-ignore
 import {Button} from "@/components/ui/button.tsx";
 
 const Navbar: React.FC = () => {

@@ -7,8 +7,8 @@ const API_BASE_URL = 'http://localhost:5087/api';
 
 // Thunk to fetch user data
 
-export const fetchUserData = createAsyncThunk(
-    'user/fetchUserData',
+export const fetchUserDataSimple = createAsyncThunk(
+    'user/fetchUserDataSimple',
     async (userId: string, { dispatch, rejectWithValue }) => {
         try {
             const response = await axios.get<User>(`${API_BASE_URL}/users/${userId}/simple`);
@@ -18,9 +18,27 @@ export const fetchUserData = createAsyncThunk(
 
             return userData;
         } catch (error) {
-            console.error('Fetch user data error:', error);
+            console.error('Fetch user simple data error:', error);
             //@ts-ignore
             return rejectWithValue(error.response.data.message);
+        }
+    }
+);
+
+export const fetchUserDataProfile = createAsyncThunk<User, string>(
+    'user/fetchUserDataProfile',
+    async (userId: string, { dispatch, rejectWithValue }) => {
+        try {
+            const response = await axios.get<User>(`${API_BASE_URL}/users/${userId}/profile`);
+            const userData: User = response.data;
+
+            dispatch(setCurrentUser(userData));
+
+            return userData;
+        } catch (error) {
+            console.error('Fetch user profile data error:', error);
+            //@ts-ignore
+            return rejectWithValue(error.response?.data?.message || 'Failed to fetch user profile data');
         }
     }
 );
