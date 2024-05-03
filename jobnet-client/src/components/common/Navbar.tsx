@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
 
     const getTextColor = (path: string) => {
         if(path === location.pathname) {
-            return "text-currentPageTextColor";
+            return "text-navbarTextColor";
         }else {
             return "text-dark";
         }
@@ -44,13 +44,16 @@ const Navbar: React.FC = () => {
                         </div>
                     </div>
                     <div className="nav-links flex p-2 mr-2">
-                        <div className={`nav-link mr-6 ${getTextColor('/')}`}>
+                        <div className={`nav-link mr-4 ${getTextColor('/')}`}>
                             <Link to="/">Home</Link>
                         </div>
-                        <div className={`nav-link mr-6 ${getTextColor('/login')}`}>
+                        <div className={`nav-link mr-4 ${getTextColor('/')} hover:text-navbarTextColor`}>
+                            <Link to="/companies">Companies</Link>
+                        </div>
+                        <div className={`nav-link mr-4 ${getTextColor('/login')}`}>
                             <Link to="/login">Login</Link>
                         </div>
-                        <div className={`nav-link mr-6 ${getTextColor('/signup')}`}>
+                        <div className={`nav-link mr-4 ${getTextColor('/signup')}`}>
                             <Link to="/signup">Signup</Link>
                         </div>
                     </div>
@@ -70,13 +73,20 @@ const Navbar: React.FC = () => {
                     </div>
                 </div>
                 <div className="nav-links flex mr-2">
-                    <div className={`nav-link p-1 ${getTextColor('/')} hover:text-navbarTextColor`}>
+                    <div className={`nav-link ${getTextColor('/')} mr-4 hover:text-navbarTextColor`}>
                         <Link to="/">Home</Link>
                     </div>
+                    <div className={`nav-link ${getTextColor('/')} mr-4 hover:text-navbarTextColor`}>
+                        <Link to="/companies">Companies</Link>
+                    </div>
+
                     <div className="userLogout ml-8">
                         {accessToken && (
                             <div className="">
-                                <button className="hover:bg-alertSuccessBgColor hover:text-sidebarBgColor hover:rounded-2xl p-2 bg-navbarBgColor text-formBtnTextColor text-sm" onClick={handleLogout}>Logout</button>
+                                <button
+                                    className="hover:bg-alertSuccessBgColor hover:text-sidebarBgColor hover:rounded-2xl p-2 bg-navbarBgColor text-formBtnTextColor text-sm"
+                                    onClick={handleLogout}>Logout
+                                </button>
                             </div>
                         )}
                     </div>

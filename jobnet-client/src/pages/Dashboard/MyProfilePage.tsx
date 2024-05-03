@@ -30,7 +30,7 @@ const MyProfilePage: React.FC = () => {
                     <div>Email: {currentUserData?.email}</div>
                 </div>
             ) : (
-                <div className="w-full h-[90vh] flex flex-col text-alertSuccess2BgColor flex justify-center items-center align-center">
+                <div className="w-full h-[90vh] flex flex-col text-alertSuccess2BgColor justify-center items-center align-center">
                     <div>You should login first</div>
                     <Button
                         className="w-[20vh] mt-2 rounded-xl text-md text-formBtnTextColor bg-formBtnColor hover:text-formBtnHoverTextColor hover:bg-formBtnHoverColor p-2">
