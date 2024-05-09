@@ -17,7 +17,7 @@ const SearchCompanyPage: React.FC = () => {
 
   useEffect(() => {
         if(currentCompany !== "" || currentCompany !== null) {
-            const url = `http://localhost:5087/api/Company/${currentCompany}`;
+            const url = `http://localhost:5087/api/Company?companyName=${currentCompany}`;
             axios.get(url).then(res => {
                 setCompanyResponses(res.data);
             });
