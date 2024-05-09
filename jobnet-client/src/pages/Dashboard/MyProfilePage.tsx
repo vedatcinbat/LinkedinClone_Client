@@ -19,7 +19,7 @@ const MyProfilePage: React.FC = () => {
         }
     }, [dispatch, userId]);
 
-    console.log(currentUserData);
+
 
 
     return (

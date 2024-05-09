@@ -31,7 +31,6 @@ export const loginUser = createAsyncThunk(
 
                 return { accessToken, refreshToken, expirationTime, userId };
             }).catch(() => {
-                console.log('Code goes here');
                 dispatch(setError("Login Failed"))
                 setTimeout(() => {
                     dispatch(setError(null))

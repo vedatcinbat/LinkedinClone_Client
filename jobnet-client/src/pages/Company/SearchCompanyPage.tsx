@@ -2,25 +2,26 @@
 import React, {useEffect, useState} from "react";
 import {Company} from "@/types/types.ts";
 import axios from "axios";
+import SearchCompanyBox from "@/components/company/SearchCompanyBox";
 
 const SearchCompanyPage: React.FC = () => {
-    const [currentCompany, setCurrentCompany] = useState<string | null>("");
+    const [currentCompany, setCurrentCompany] = useState<string>("");
 
     const [companyResponses, setCompanyResponses] = useState<Company[]>([]);
 
-    const handleCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCurrentCompany(e.target.value);
-        console.log(currentCompany);
+    const handleCompanyNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault();
+        setCurrentCompany(event.target.value);
     }
 
-    useEffect(() => {
-        if(currentCompany !== "" || currentCompany !== null || true) {
+
+  useEffect(() => {
+        if(currentCompany !== "" || currentCompany !== null) {
             const url = `http://localhost:5087/api/Company/${currentCompany}`;
             axios.get(url).then(res => {
                 setCompanyResponses(res.data);
             });
         }
-        console.log(companyResponses)
     }, [currentCompany]);
 
     return (
@@ -30,7 +31,13 @@ const SearchCompanyPage: React.FC = () => {
                     <input className="text-xl w-[80vh] h-[10vh] p-2 text-mainBgColor" type="text" placeholder="Company Name" onChange={handleCompanyNameChange}/>
                 </div>
                 <div className="companiesResponse">
-
+                    {companyResponses !== null ? (
+                        companyResponses.map(company => (
+                            <SearchCompanyBox key={company.companyId} company={company}/>
+                        ))
+                    ) : (
+                        <div className="text-xl">...</div>
+                    )}
                 </div>
             </div>
         </div>
