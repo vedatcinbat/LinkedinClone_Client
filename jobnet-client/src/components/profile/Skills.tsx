@@ -82,15 +82,17 @@ const Skills: React.FC<SkillProps> = ({skills}) => {
         <div
             className={`userExperiences w-full bg-sidebarBorderColor h-[70vh] flex flex-col items-center ${skills && skills?.length > 0 ? 'overflow-y-scroll' : ''}`}>
             <div className="text-2xl text-black font-bold">Skills</div>
-            <div
-                className="messagePart top-0 right-0 text-md p-2 rounded-lg cursor-pointer bg-mainBgColor text-navbarTextColor">
-                {showMessage && messages.map((message, index) => (
-                    <div key={index} className="text-alertSuccess2BgColor text-sm p-2 rounded-lg">{message}</div>
-                ))}
-            </div>
+            {showMessage && messages.map((message, index) => (
+                    <div className="messagePart top-0 right-0 text-md p-2 rounded-lg cursor-pointer text-navbarTextColor">
+                        <div key={index} className="text-alerSutccess2BgColor text-sm p-2 rounded-lg">{message}</div>
+                    </div>
+
+                )
+            )}
+
             <div className="addSkillPart flex justify-center items-center gap-2">
-                <div className="Input">
-                    <Select>
+        <div className="Input">
+        <Select>
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="Add skill"/>
                         </SelectTrigger>
@@ -115,7 +117,7 @@ const Skills: React.FC<SkillProps> = ({skills}) => {
             {skills && skills.length > 0 ? (
                 <div className="mt-4">
                     {skills.map((skill, index) => (
-                        <SingleSkill skill={skill} index={index}/>
+                        <SingleSkill skill={skill} index={index} />
                     ))}
                 </div>
             ) : (
