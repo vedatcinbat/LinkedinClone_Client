@@ -14,22 +14,33 @@ const UserPage = () => {
 
     const [userData, setUserData] = useState<User | null>(null);
 
+
     useEffect(() => {
         const baseUrl = `http://localhost:5087/api/users/${userId}/profile`;
+        try {
             axios.get(`${baseUrl}`).then(res => {
                 setUserData(res.data);
-                console.log(userData);
-                //@ts-ignore
-            }).catch(err => {
-                console.log(err);
-                setUserData(null);
             });
-    }, [])
+            //@ts-ignore
+        } catch (err) {
+            console.log(err);
+            setUserData(null);
+        }
+    }, []);
+
 
 
     return(
         <>
-            <div>UserPage</div>
+            {userData !== null ? (
+                <>
+                    <div className="text-formBtnHoverTextColor">{userData?.firstname}</div>
+                </>
+            ) : (
+                <>
+                    <div className="text-text-formBtnHoverTextColor">No user found !</div>
+                </>
+            )}
         </>
     )
 }

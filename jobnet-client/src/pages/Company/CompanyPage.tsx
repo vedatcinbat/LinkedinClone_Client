@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {Company} from "@/types/types.ts";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 interface CompanyParams {
     companyId: string;
 }
@@ -23,6 +23,12 @@ const CompanyPage: React.FC = () => {
             setCompanyData(null);
         });
     }, [])
+
+
+    const goToUserPage = (userId: string): string => {
+        return `http://localhost:5173/user/${userId}`;
+    }
+
 
     // @ts-ignore
     return(
@@ -59,14 +65,17 @@ const CompanyPage: React.FC = () => {
                         {companyData.talentManagers?.length !== 0 ? (
                             <div className="talentManagers flex justify-center gap-2 overflow-x-auto">
                                 {companyData.talentManagers?.map((emp) => (
-                                    <div
-                                        className="bg-gray3 text-black w-[25vh] h-[30vh] rounded-xl flex flex-col items-center justify-evenly cursor-pointer">
-                                        <div className="profileImg rounded-full bg-mainBgColor w-[8vh] h-[8vh]"></div>
+                                    <Link to={goToUserPage(emp.userId.toString())}>
                                         <div
-                                            className="text-xl text-mainBgColor">{emp.firstname?.toUpperCase()} {emp.lastname?.toUpperCase()}</div>
-                                        <div className="text-sm text-gray7">{emp.title}</div>
-                                        <div className="text-xs text-gray7">{emp.country}</div>
-                                    </div>
+                                            className="bg-gray3 text-black w-[25vh] h-[30vh] rounded-xl flex flex-col items-center justify-evenly cursor-pointer">
+                                            <div
+                                                className="profileImg rounded-full bg-mainBgColor w-[8vh] h-[8vh]"></div>
+                                            <div
+                                                className="text-xl text-mainBgColor">{emp.firstname?.toUpperCase()} {emp.lastname?.toUpperCase()}</div>
+                                            <div className="text-sm text-gray7">{emp.title}</div>
+                                            <div className="text-xs text-gray7">{emp.country}</div>
+                                        </div>
+                                    </Link>
                                 ))}
                             </div>
                         ) : (
