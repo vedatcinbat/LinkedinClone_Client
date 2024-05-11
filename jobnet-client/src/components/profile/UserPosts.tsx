@@ -17,6 +17,7 @@ const UserPosts: React.FC<UserPostsProps> = ({postData}) => {
                 </div>
             ) : (
                 <div className = "h-[50vh] overflow-y-scroll flex flex-col items-center justify-between mt-2 gap-4 mb-2">
+                    <div className="text-2xl text-black font-bold">Posts</div>
                     {postData?.map((post, key: number) => (
                         <div key={key}>
                             {post.textContent && <SingleTweetLikeComponent post={post} />}

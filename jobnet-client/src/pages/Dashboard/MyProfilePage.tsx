@@ -8,6 +8,8 @@ import {Link} from "react-router-dom";
 import UserDetails from "@/components/profile/UserDetails.tsx";
 import UserPosts from "@/components/profile/UserPosts.tsx";
 import UserExperiences from "@/components/profile/UserExperiences.tsx";
+import UserEducations from "@/components/profile/UserEducations.tsx";
+import Skills from "@/components/profile/Skills.tsx";
 
 const MyProfilePage: React.FC = () => {
 
@@ -31,8 +33,8 @@ const MyProfilePage: React.FC = () => {
                     <UserDetails currentUserData={currentUserData} />
                     <UserPosts postData={currentUserData.posts} />
                     <UserExperiences experiencesData={currentUserData.experiences} />
-                    <div className="userSchoolsSection w-full h-[30vh] bg-sidebarBorderColor"></div>
-                    <div className="userSkillsSection w-full h-[30vh] bg-sidebarBorderColor"></div>
+                    <UserEducations educationsData={currentUserData.educations} />
+                    <Skills skills={currentUserData.skills} />
                 </div>
             ) : (
                 <div className="w-full h-[90vh] flex flex-col text-alertSuccess2BgColor justify-center items-center align-center">

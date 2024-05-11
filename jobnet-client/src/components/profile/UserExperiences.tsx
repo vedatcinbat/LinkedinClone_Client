@@ -9,12 +9,14 @@ interface UserExperiencesProps {
 const UserExperiences: React.FC<UserExperiencesProps> = ({ experiencesData }) => {
 
     return (
-        // @ts-ignore
-        <div className={`userExperiences w-full bg-sidebarBorderColor h-[50vh] flex flex-col justify-center items-center gap-2 ${experiencesData.length && 'overflow-y-scroll'}`}>
+        <div
+            // @ts-ignore
+            className={`userExperiences w-full bg-sidebarBorderColor h-[50vh] flex flex-col justify-center items-center gap-2 ${experiencesData?.length > 0 ? 'overflow-y-scroll' : ''}`}>
+            <div className="text-2xl text-black font-bold">Experiences</div>
             {experiencesData && experiencesData.length > 0 ? (
                 experiencesData.map((experience, index) => (
-                        //@ts-ignore
-                        <SingleExperience exp={experience} index={index} />
+                    //@ts-ignore
+                    <SingleExperience exp={experience} index={index}/>
                 ))
             ) : (
                 <div className="overflow-hidden">No Experience Found</div>

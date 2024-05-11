@@ -104,6 +104,13 @@ export interface Comment {
     post: Post;
 }
 
+export interface EducationSimpleType {
+    degree: string;
+    startDate: Date;
+    endDate: Date;
+    school: SimpleSchool;
+}
+
 export interface Education {
     educationId: number;
     degree: string;
@@ -191,6 +198,14 @@ export interface Post {
     likeCount: number;
     comments: Comment[] | null;
     likes: Like[] | null;
+}
+
+export interface SimpleSchool {
+    establishedAt: Date;
+    graduatesCount: number;
+    location: string;
+    schoolId: number;
+    schoolName: string;
 }
 
 export interface School {
