@@ -30,7 +30,7 @@ const SearchCompanyPage: React.FC = () => {
                 <div className="inputArea">
                     <input className="text-xl w-[80vh] h-[10vh] p-2 text-mainBgColor" type="text" placeholder="Company Name" onChange={handleCompanyNameChange}/>
                 </div>
-                <div className="companiesResponse">
+                <div className="companiesResponse h-[70vh] overflow-y-scroll">
                     {companyResponses !== null ? (
                         companyResponses.map(company => (
                             <SearchCompanyBox key={company.companyId} company={company}/>

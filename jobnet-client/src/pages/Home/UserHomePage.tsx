@@ -23,7 +23,7 @@ const UserHomePage = () => {
                         <Alert className="bg-alertSuccess2BgColor text-alertErrorTextColor p-1">
                             <RocketIcon className="h-4 w-4"/>
                             <AlertTitle>Loading...</AlertTitle>
-                            <AlertDescription>Informations are loading</AlertDescription>
+                            <AlertDescription>Information's are loading</AlertDescription>
                         </Alert>
                     </div>
                 </>) : (

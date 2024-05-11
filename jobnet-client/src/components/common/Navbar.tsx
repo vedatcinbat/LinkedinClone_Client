@@ -79,12 +79,15 @@ const Navbar: React.FC = () => {
                     <div className={`nav-link ${getTextColor('/')} mr-4 hover:text-navbarTextColor`}>
                         <Link to="/companies">Companies</Link>
                     </div>
+                    <div className={`nav-link ${getTextColor('/')} mr-4 hover:text-navbarTextColor`}>
+                        <Link to="/my-profile">Profile</Link>
+                    </div>
                     <div className="userLogout ml-6 mr-4 hover:text-navbarTextColor">
                         {accessToken && (
-                                <button
-                                    className="hover:bg-alertSuccessBgColor hover:text-sidebarBgColor hover:rounded-2xl p-2 bg-navbarBgColor text-formBtnTextColor text-sm"
-                                    onClick={handleLogout}>Logout
-                                </button>
+                            <button
+                                className="hover:bg-alertSuccessBgColor hover:text-sidebarBgColor hover:rounded-2xl p-2 bg-navbarBgColor text-formBtnTextColor text-sm"
+                                onClick={handleLogout}>Logout
+                            </button>
                         )}
                     </div>
                 </div>
