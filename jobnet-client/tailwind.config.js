@@ -57,6 +57,7 @@ module.exports = {
         "gray9": "#212529",
         "gray10": "#121212",
       "black1": "#000000",
+      "commentBg": "#4d037f",
 "black2": "#111111",
 "black3": "#222222",
 "black4": "#333333",

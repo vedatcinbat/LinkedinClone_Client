@@ -5,29 +5,34 @@ import {RootState} from "@/redux/store.ts";
 import {fetchUserDataProfile} from "@/redux/user/userThunks.ts";
 import {Button} from "@/components/ui/button.tsx";
 import {Link} from "react-router-dom";
+import UserDetails from "@/components/profile/UserDetails.tsx";
+import UserPosts from "@/components/profile/UserPosts.tsx";
+import UserExperiences from "@/components/profile/UserExperiences.tsx";
 
 const MyProfilePage: React.FC = () => {
 
     const dispatch = useDispatch();
     const userId = useSelector((state: RootState) => state.auth.userId);
     const currentUserData = useSelector((state: RootState) => state.user.currentUser);
+    console.log(currentUserData)
 
     useEffect(() => {
         if(userId) {
             //@ts-ignore
             dispatch(fetchUserDataProfile(userId));
         }
-    }, [dispatch, userId]);
-
-
+    }, []);
 
 
     return (
         <div>
             {currentUserData ? (
-                <div className="text-alertSuccess2BgColor">
-                    <div>Welcome, {currentUserData?.firstname}</div>
-                    <div>Email: {currentUserData?.email}</div>
+                <div className="userDataContainer w-full flex flex-col justify-between gap-2 p-1">
+                    <UserDetails currentUserData={currentUserData} />
+                    <UserPosts postData={currentUserData.posts} />
+                    <UserExperiences experiencesData={currentUserData.experiences} />
+                    <div className="userSchoolsSection w-full h-[30vh] bg-sidebarBorderColor"></div>
+                    <div className="userSkillsSection w-full h-[30vh] bg-sidebarBorderColor"></div>
                 </div>
             ) : (
                 <div className="w-full h-[90vh] flex flex-col text-alertSuccess2BgColor justify-center items-center align-center">

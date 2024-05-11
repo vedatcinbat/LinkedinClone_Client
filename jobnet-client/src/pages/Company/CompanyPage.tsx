@@ -38,8 +38,8 @@ const CompanyPage: React.FC = () => {
                     <div>Company Data Not Found</div>
                 </>
                 ) : (
-                <div className="w-full h-[90vh] bg-mainBgColor">
-                    <div className="CompanyDetails bg-gray8 w-full h-[30vh] flex justify-center items-center">
+                <div className="w-full h-[90vh] bg-mainBgColor p-1">
+                    <div className="CompanyDetails bg-gray8 w-full h-[30vh] flex justify-center items-center rounded-xl">
                         <div className="content flex justify-center items-center bg-mainBgColor w-[80vh] h-[20vh] rounded-xl">
                             <div className="upperPart">
                                 <div
@@ -61,7 +61,7 @@ const CompanyPage: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="EmployeesHere mt-2 bg-gray8 w-full h-[40vh] flex justify-center items-center">
+                    <div className="EmployeesHere mt-2 bg-gray8 w-full h-[40vh] flex justify-center items-center rounded-xl">
                         {companyData.talentManagers?.length !== 0 ? (
                             <div className="talentManagers flex justify-center gap-2 overflow-x-auto">
                                 {companyData.talentManagers?.map((emp) => (
@@ -84,7 +84,7 @@ const CompanyPage: React.FC = () => {
                             </>
                         )}
                     </div>
-                    <div className="OpeningJobs mt-2 bg-gray8 w-full h-[40vh] flex justify-center items-center">
+                    <div className="OpeningJobs mt-2 bg-gray8 w-full h-[40vh] flex justify-center items-center rounded-xl">
                         {companyData.currentAvailableJobs?.length !== 0 ? (
                             <div className="talentManagers flex justify-center gap-2 overflow-x-auto">
                                 {companyData.currentAvailableJobs?.map((job) => (

@@ -116,6 +116,18 @@ export interface Education {
     school: School;
 }
 
+export interface UserExperienceSimpleType {
+    company: Company;
+    companyId: number;
+    companyName: string;
+    description: string;
+    endDate?: Date | undefined;
+    experienceId: number;
+    location: string;
+    startDate: Date;
+    title: string;
+}
+
 export interface Experience {
     experienceId: number;
     title: string;
