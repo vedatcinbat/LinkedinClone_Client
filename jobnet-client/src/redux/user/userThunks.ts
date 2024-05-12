@@ -43,22 +43,20 @@ export const fetchUserDataProfile = createAsyncThunk<User, string>(
     }
 );
 
-// Thunk to update current user data
-
-export const updateCurrentUser = createAsyncThunk(
-    'user/updateCurrentUser',
-    async (userId: string, { dispatch, rejectWithValue }) => {
+export const updateUserProfile = createAsyncThunk<User, number>(
+    'user/updateUserProfile',
+    async (userId: number, { dispatch, rejectWithValue }) => {
         try {
-            const response = await axios.get<User>(`${API_BASE_URL}/User/${userId}`);
+            const response = await axios.get<User>(`${API_BASE_URL}/users/${userId}/profile`);
             const userData: User = response.data;
 
             dispatch(setCurrentUser(userData));
 
             return userData;
         } catch (error) {
-            console.error('Update current user error:', error);
+            console.error('Update user profile data error:', error);
             //@ts-ignore
-            return rejectWithValue(error.response.data.message);
+            return rejectWithValue(error.response?.data?.message || 'Failed to update user profile data');
         }
     }
 );

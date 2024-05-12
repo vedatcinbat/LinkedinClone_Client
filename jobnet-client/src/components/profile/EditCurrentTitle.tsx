@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
-import {updateCurrentUserCompany} from "@/redux/user/userSlice.ts";
+import {updateCurrentUserTitle} from "@/redux/user/userSlice.ts";
 //@ts-ignore
 const EditCurrentTitle = ({setEditTitlePopup, setShowMessagePopup, setMessagePopupText, setCurrentTitle, currentTitle}) => {
 
@@ -23,7 +23,7 @@ const EditCurrentTitle = ({setEditTitlePopup, setShowMessagePopup, setMessagePop
                 }
             }
         ).then(() => {
-            dispatch(updateCurrentUserCompany(currentTitle));
+            dispatch(updateCurrentUserTitle(currentTitle));
 
             setEditTitlePopup(false);
             setMessagePopupText(`Your title has been updated to : ${currentTitle}`)

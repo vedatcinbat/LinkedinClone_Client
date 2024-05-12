@@ -4,25 +4,43 @@ import SingleTweetLikeComponent from "@/components/profile/SingleTweetLikeCompon
 
 interface UserPostsProps {
     postData: Post[] | null;
+    showMessagePopup: boolean;
+    setMessagePopupText: React.Dispatch<React.SetStateAction<string>>;
+    setShowMessagePopup: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowPostTweet: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const UserPosts: React.FC<UserPostsProps> = ({postData}) => {
+const UserPosts: React.FC<UserPostsProps> = ({setShowPostTweet, postData, showMessagePopup, setMessagePopupText, setShowMessagePopup}) => {
 
     console.log(postData);
     return (
         <div className="userPosts w-full bg-sidebarBorderColor">
             {postData?.length === 0 ? (
-                <div className="h-[30vh] flex justify-center items-center">
-                    <div>No Post</div>
+                <div className="h-[30vh] flex flex-col gap-2 justify-center items-center">
+                    <div className="text-2xl font-bold">No Post</div>
+                    <button
+                        onClick={() => setShowPostTweet(true)}
+                        className="bg-black text-white p-2 rounded-xl">Post Now</button>
                 </div>
             ) : (
-                <div className = "h-[50vh] overflow-y-scroll flex flex-col items-center justify-between mt-2 gap-4 mb-2">
-                    <div className="text-2xl text-black font-bold">Posts</div>
-                    {postData?.map((post, key: number) => (
-                        <div key={key}>
-                            {post.textContent && <SingleTweetLikeComponent post={post} />}
-                        </div>
-                    ))}
+                <div className="h-[50vh] overflow-y-scroll flex flex-col items-center mt-2 gap-4 mb-2">
+                    <div className="upperPart text-center">
+                        <div className="text-2xl text-black text-center font-bold">Posts</div>
+                        <button
+                            onClick={() => setShowPostTweet(true)}
+                            className="bg-black text-white p-2 rounded-xl">Post Now
+                        </button>
+                    </div>
+                    <div className="postPart">
+                        {postData?.map((post, key: number) => (
+                            <div key={key}>
+                                {post.textContent && <SingleTweetLikeComponent setShowMessagePopup={setShowMessagePopup}
+                                                                               setMessagePopupText={setMessagePopupText}
+                                                                               showMessagePopup={showMessagePopup}
+                                                                               post={post}/>}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             )}
         </div>

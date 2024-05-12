@@ -3,7 +3,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import {User} from '@/types/types.ts';
 
-
 interface UserState {
     currentUser: User | null;
 }
@@ -25,13 +24,16 @@ export const userSlice = createSlice({
             }
         },
         updateCurrentUserTitle(state, action: PayloadAction<string>) {
-            if(state.currentUser) {
+            if(state.currentUser && state.currentUser.title) {
                 state.currentUser.title = action.payload;
             }
+        },
+        updateCurrentUser(state, action: PayloadAction<User>) {
+            state.currentUser = action.payload;
         }
     },
 });
 
-export const { setCurrentUser, updateCurrentUserCompany, updateCurrentUserTitle } = userSlice.actions;
+export const { setCurrentUser, updateCurrentUserCompany, updateCurrentUser, updateCurrentUserTitle } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -38,6 +38,14 @@ export interface UserCredentials {
     password: string;
 }
 
+export interface UserPostRequest {
+    caption: string;
+    postType: number;
+    textContent: string;
+    imageContent:  null;
+    imagesContent:  null;
+}
+
 // Response Types
 
 
