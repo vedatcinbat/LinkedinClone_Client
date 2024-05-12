@@ -11,12 +11,16 @@ import UserExperiences from "@/components/profile/UserExperiences.tsx";
 import UserEducations from "@/components/profile/UserEducations.tsx";
 import Skills from "@/components/profile/Skills.tsx";
 import EditCurrentCompany from "@/components/profile/EditCurrentCompany.tsx";
+import EditCurrentTitle from "@/components/profile/EditCurrentTitle.tsx";
 
 const MyProfilePage: React.FC = () => {
 
     const [editCompanyPopup, setEditCompanyPopup] = useState(false);
     const [showMessagePopup, setShowMessagePopup] = useState(false);
     const [messagePopupText, setMessagePopupText] = useState<string>('');
+
+    const [editTitlePopup, setEditTitlePopup] = useState(false);
+    const [currentTitle, setCurrentTitle] = useState<string>('');
 
     const dispatch = useDispatch();
     const userId = useSelector((state: RootState) => state.auth.userId);
@@ -35,8 +39,8 @@ const MyProfilePage: React.FC = () => {
         <div>
             {currentUserData ? (
                 <>
-                    <div className={`mainCode userDataContainer w-full flex flex-col justify-between gap-2 p-1 ${editCompanyPopup || showMessagePopup ? 'opacity-5' : 'opacity-100'}`}>
-                        <UserDetails setEditCompanyPopup={setEditCompanyPopup} currentUserData={currentUserData} />
+                    <div className={`mainCode userDataContainer w-full flex flex-col justify-between gap-2 p-1 ${editCompanyPopup || showMessagePopup || editTitlePopup ? 'opacity-5' : 'opacity-100'}`}>
+                        <UserDetails setEditTitlePopup={setEditTitlePopup} setEditCompanyPopup={setEditCompanyPopup} currentUserData={currentUserData} />
                         <UserPosts postData={currentUserData.posts} />
                         <UserExperiences experiencesData={currentUserData.experiences} />
                         <UserEducations educationsData={currentUserData.educations} />
@@ -45,6 +49,11 @@ const MyProfilePage: React.FC = () => {
                     {editCompanyPopup && (
                         <div className={`w-[80vh] h-[90vh] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-commentBg ${showMessagePopup ? 'opacity-35' : 'opacity-100'}`}>
                             <EditCurrentCompany setShowMessagePopup={setShowMessagePopup} setMessagePopupText={setMessagePopupText} setEditCompanyPopup={setEditCompanyPopup} />
+                        </div>
+                    )}
+                    {editTitlePopup && (
+                        <div className={`w-[80vh] h-[90vh] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-commentBg ${showMessagePopup ? 'opacity-35' : 'opacity-100'}`}>
+                            <EditCurrentTitle currentTitle={currentTitle} setShowMessagePopup={setShowMessagePopup} setMessagePopupText={setMessagePopupText} setEditTitlePopup={setEditTitlePopup} setCurrentTitle={setCurrentTitle}  />
                         </div>
                     )}
                     {showMessagePopup && (

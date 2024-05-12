@@ -1,9 +1,11 @@
+//@ts-ignore
 import React, {useEffect, useState} from "react";
 import {Company} from "@/types/types.ts";
 import axios from "axios";
 import UpdateCompanyBox from "@/components/company/UpdateCompanyBox.tsx";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
+import {updateCurrentUserCompany} from "@/redux/user/userSlice.ts";
 //@ts-ignore
 const EditCurrentCompany = ({setEditCompanyPopup, setMessagePopupText, setShowMessagePopup}) => {
 
@@ -12,6 +14,7 @@ const EditCurrentCompany = ({setEditCompanyPopup, setMessagePopupText, setShowMe
     const [currentCompanyId, setCurrentCompanyId] = useState<number>(0);
     const userAuthData = useSelector((state: RootState) => state.auth);
     const token = userAuthData.accessToken;
+    const dispatch = useDispatch();
 
 
     useEffect(() => {
@@ -35,16 +38,17 @@ const EditCurrentCompany = ({setEditCompanyPopup, setMessagePopupText, setShowMe
                 }
             }
         )
-            .then((res) => {
-                if(!res.data.problemDetails) {
-                    setEditCompanyPopup(false);
-                    setMessagePopupText(`Now you are working at CompanyId : ${currentCompanyId}`)
-                    setShowMessagePopup(true);
+            .then(() => {
+                // Dispatch action to update current user company information
+                dispatch(updateCurrentUserCompany(currentCompanyId));
 
-                    setTimeout(() => {
-                        setShowMessagePopup(false);
-                    }, 4000);
-                }
+                setEditCompanyPopup(false);
+                setMessagePopupText(`Now you are working at CompanyId : ${currentCompanyId}`)
+                setShowMessagePopup(true);
+
+                setTimeout(() => {
+                    setShowMessagePopup(false);
+                }, 4000);
             })
             .catch((err) => {
                 console.log(err);

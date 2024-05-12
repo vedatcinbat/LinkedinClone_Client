@@ -2,10 +2,7 @@
 import React from "react";
 
 // @ts-ignore
-const UserDetails = ({currentUserData, setEditCompanyPopup}) => {
-
-
-
+const UserDetails = ({currentUserData, setEditCompanyPopup, setEditTitlePopup}) => {
 
     return (
         <div className="userInformationsSimple flex items-center w-full h-[30vh] bg-sidebarBorderColor">
@@ -45,7 +42,7 @@ const UserDetails = ({currentUserData, setEditCompanyPopup}) => {
                 <div className="postCount flex flex-col justify-center items-center">
                     <div className="text-white">Title</div>
                     <div
-                        onClick={() => setEditCompanyPopup(true)}
+                        onClick={() => setEditTitlePopup(true)}
                         className="text-gray5 cursor-pointer">{currentUserData.title === null ? "(NoTitle)" : currentUserData.title}</div>
                 </div>
             </div>
