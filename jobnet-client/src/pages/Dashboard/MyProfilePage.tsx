@@ -55,7 +55,7 @@ const MyProfilePage: React.FC = () => {
                         </div>
                     )}
                     {editTitlePopup && (
-                        <div className={`w-[80vh] h-[90vh] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-commentBg ${showMessagePopup ? 'opacity-35' : 'opacity-100'}`}>
+                        <div className={`w-[80vh] h-[40vh] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-commentBg ${showMessagePopup ? 'opacity-35' : 'opacity-100'}`}>
                             <EditCurrentTitle currentTitle={currentTitle} setShowMessagePopup={setShowMessagePopup} setMessagePopupText={setMessagePopupText} setEditTitlePopup={setEditTitlePopup} setCurrentTitle={setCurrentTitle}  />
                         </div>
                     )}
