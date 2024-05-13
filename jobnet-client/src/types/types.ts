@@ -78,6 +78,8 @@ export interface User {
     aboutMe?: string;
     isDeleted: boolean;
     companyId?: number | null;
+    followingCount?: number;
+    followerCount?: number;
     company?: Company | null;
     posts: Post[] | null;
     comments: Comment[] | null;
@@ -101,6 +103,16 @@ export interface UserSimpleType {
     aboutMe: string;
     companyId: number;
     company: Company | null;
+}
+
+export interface UserDetailType {
+    firstname: string;
+    lastname: string;
+    title: string;
+    aboutMe: string;
+    followerCount: number;
+    followingCount: number;
+    posts: Post[];
 }
 
 

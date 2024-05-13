@@ -8,9 +8,9 @@ import {fetchUserDataProfile} from "@/redux/user/userThunks.ts";
 
 interface PostInterface {
     post: Post;
-    showMessagePopup: boolean;
-    setMessagePopupText: React.Dispatch<React.SetStateAction<string>>;
-    setShowMessagePopup: React.Dispatch<React.SetStateAction<boolean>>;
+    showMessagePopup?: boolean;
+    setMessagePopupText?: React.Dispatch<React.SetStateAction<string>>;
+    setShowMessagePopup?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SingleTweetLikeComponent: React.FC<PostInterface> = ({post, setMessagePopupText, setShowMessagePopup}) => {
@@ -22,29 +22,31 @@ const SingleTweetLikeComponent: React.FC<PostInterface> = ({post, setMessagePopu
     //const currentUserData = useSelector((state: RootState) => state.user.currentUser);
 
     const deletePost = (postId: number) => {
-        const url = `http://localhost:5087/api/Post/deletePost/${postId}`;
+        if(setShowMessagePopup && setMessagePopupText && setShowMessagePopup) {
+            const url = `http://localhost:5087/api/Post/deletePost/${postId}`;
 
-        axios.delete(
-            url,
-            {
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
+            axios.delete(
+                url,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
                 }
-            }
-        ).then(() => {
-            setMessagePopupText("Post deleted successfully with id : " + postId);
-            setShowMessagePopup(true);
+            ).then(() => {
+                setMessagePopupText("Post deleted successfully with id : " + postId);
+                setShowMessagePopup(true);
 
-            setTimeout(() => {
-                setShowMessagePopup(false);
-            }, 3000);
+                setTimeout(() => {
+                    setShowMessagePopup(false);
+                }, 3000);
 
-            //@ts-ignore
-            dispatch(fetchUserDataProfile(currentUser?.userId));
-        }).catch(err => {
-            console.log(err);
-        })
+                //@ts-ignore
+                dispatch(fetchUserDataProfile(currentUser?.userId));
+            }).catch(err => {
+                console.log(err);
+            })
+        }
     }
 
     const SimpleDate = (date: Date): string => {
@@ -65,7 +67,7 @@ const SingleTweetLikeComponent: React.FC<PostInterface> = ({post, setMessagePopu
             className={`w-[50vh] mb-2 h-[23vh] bg-gray8 text-formBtnHoverTextColor rounded-xl p-1 flex flex-col justify-between items-center relative`}>
             <button
                 onClick={() => deletePost(post.postId)}
-                className={`absolute -top-2 -right-5 bg-alertErrorBgColor text-alertErrorTextColor p-2 rounded-2xl ${isHovered ? 'opacity-100' : 'opacity-0'}`}>Delete</button>
+                className={`absolute -top-2 -right-5 bg-alertErrorBgColor text-alertErrorTextColor p-2 rounded-2xl ${isHovered && setShowMessagePopup ? 'opacity-100' : 'opacity-0'}`}>Delete</button>
             <div className="publisherInformation flex h-[10vh] mb-2 rounded-lg gap-2 justify-evenly items-center bg-gray7 w-full">
                 <div className="text-gray6">({SimpleDate(post.publishTime)})</div>
                 <div className="">{currentUser?.firstname} {currentUser?.lastname}</div>

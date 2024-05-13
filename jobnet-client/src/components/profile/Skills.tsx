@@ -16,9 +16,10 @@ import {useSelector} from "react-redux";
 
 interface SkillProps {
     skills: Skill[] | null;
+    mes: string;
 }
 
-const Skills: React.FC<SkillProps> = ({skills}) => {
+const Skills: React.FC<SkillProps> = ({skills, mes}) => {
 
     const [allSkills, setAllSkills] = useState<Skill[]>([]);
 
@@ -89,35 +90,38 @@ const Skills: React.FC<SkillProps> = ({skills}) => {
 
                 )
             )}
-
-            <div className="addSkillPart flex justify-center items-center gap-2">
-        <div className="Input">
-        <Select>
-                        <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="Add skill"/>
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                <SelectLabel>Technology</SelectLabel>
-                                {allSkills && allSkills.map((skill, index) => (
-                                    <SelectItem key={index} value={skill.skillName} onMouseEnter={() => ChangeCurrentSkillId(skill.skillId)}>
-                                        {skill.skillName}
-                                    </SelectItem>
-                                ))}
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
+            {mes === 'same-user' && (
+                <div className="addSkillPart flex justify-center items-center gap-2">
+                    <div className="Input">
+                        <Select>
+                            <SelectTrigger className="w-[180px]">
+                                <SelectValue placeholder="Add skill"/>
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    <SelectLabel>Technology</SelectLabel>
+                                    {allSkills && allSkills.map((skill, index) => (
+                                        <SelectItem key={index} value={skill.skillName}
+                                                    onMouseEnter={() => ChangeCurrentSkillId(skill.skillId)}>
+                                            {skill.skillName}
+                                        </SelectItem>
+                                    ))}
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    <div className="addButton ">
+                        <button
+                            onClick={addCurrentSkill}
+                            className="bg-formBtnColor text-formBtnTextColor w-[15vh] p-2 rounded-xl">Add
+                        </button>
+                    </div>
                 </div>
-                <div className="addButton ">
-                    <button
-                        onClick={addCurrentSkill}
-                        className="bg-formBtnColor text-formBtnTextColor w-[15vh] p-2 rounded-xl">Add</button>
-                </div>
-            </div>
+            )}
             {skills && skills.length > 0 ? (
                 <div className="mt-4">
                     {skills.map((skill, index) => (
-                        <SingleSkill skill={skill} index={index} />
+                        <SingleSkill skill={skill} index={index}/>
                     ))}
                 </div>
             ) : (
