@@ -8,8 +8,10 @@ import UserPosts from "@/components/profile/UserPosts.tsx";
 import UserExperiences from "@/components/profile/UserExperiences.tsx";
 import UserEducations from "@/components/profile/UserEducations.tsx";
 import Skills from "@/components/profile/Skills.tsx";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
+import {setFollowersData, setFollowingsData, setShowFollowers, setShowFollowings} from "@/redux/user/userSlice.ts";
+import FollowersUserBox from "@/components/Connections/FollowersUserBox.tsx";
 
 interface UserParams {
     userId: string;
@@ -21,6 +23,12 @@ const UserPage = () => {
     const currentUserId = useSelector((state: RootState) => state.auth.userId);
     const [userData, setUserData] = useState<User | null>(null);
     const [amIFollow, setAmIFollow] = useState<boolean | null>(null);
+    let showFollowers = useSelector((state: RootState) => state.user.showFollowers);
+    let showFollowings = useSelector((state: RootState) => state.user.showFollowings);
+
+    const dispatch = useDispatch();
+    const followersData = useSelector((state: RootState) => state.user.followersData);
+    const followingsData = useSelector((state: RootState) => state.user.followingsData);
 
 
     useEffect(() => {
@@ -43,21 +51,97 @@ const UserPage = () => {
         }
     }, []);
 
+    const closeFollowers = () => {
+        dispatch(setShowFollowers(false));
+        dispatch(setFollowersData([]));
+    }
 
+    const closeFollowings = () => {
+        dispatch(setShowFollowings(false));
+        dispatch(setFollowingsData([]));
+    }
+
+    console.log(followersData)
 
     return(
         <>
             {userData !== null ? (
-                <>
+                <div className={`${(showFollowers || showFollowings) && 'h-[92vh] overflow-hidden'}`}>
                     <div
-                        className={`mainCode userDataContainer w-full flex flex-col justify-between gap-2 p-1`}>
+                        className={`mainCode userDataContainer w-full flex flex-col justify-between gap-2 p-1 ${showFollowers || showFollowings ? 'opacity-15' : 'opacity-100'}`}>
                         <UserDetails setAmIFollow={setAmIFollow} amIFollow={amIFollow} userId={userId} currentUserData={userData} mes={(currentUserId?.toString() !== userId) ? 'another-user' : 'same-user'}  />
                         <UserPosts postData={userData.posts} mes={(currentUserId?.toString() !== userId) ? 'another-user' : 'same-user'} />
                         <UserExperiences experiencesData={userData.experiences} />
                         <UserEducations educationsData={userData.educations} />
                         <Skills skills={userData.skills} mes={(currentUserId?.toString() !== userId) ? 'another-user' : 'same-user'}  />
                     </div>
-                </>
+                    {showFollowers && (
+                        <>
+                            {followersData?.length == 0 ? (
+                                <div
+                                    className="absolute top-[10%] left-[30%] w-[70vh] h-[85vh] bg-gray7 text-white rounded-lg p-2">
+                                    <button onClick={closeFollowers}
+                                            className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
+                                    </button>
+                                    <div className="header text-center">
+                                        <div>Followers</div>
+                                    </div>
+                                    <div className="users">
+                                        <div>No Follower Found</div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div
+                                    className="absolute top-[10%] left-[30%] w-[70vh] h-[85vh] bg-gray7 text-white rounded-lg p-2 flex flex-col justify-start items-center p-2">
+                                    <button onClick={closeFollowers}
+                                            className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
+                                    </button>
+                                    <div className="header">
+                                        <div>Followers</div>
+                                    </div>
+                                    <div className="users w-full mt-4">
+                                        {followersData?.map((user, key) => (
+                                            <FollowersUserBox user={user} key={key}/>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </>
+                    )}
+                    {showFollowings && (
+                        <>
+                            {followingsData?.length == 0 ? (
+                                <div
+                                    className="absolute top-[10%] left-[30%] w-[70vh] h-[85vh] bg-gray7 text-white rounded-lg p-2">
+                                    <button onClick={closeFollowings}
+                                            className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
+                                    </button>
+                                    <div className="header">
+                                        <div>Followings</div>
+                                    </div>
+                                    <div className="users">
+                                        <div>No Following Found</div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div
+                                    className="absolute top-[10%] left-[30%] w-[70vh] h-[85vh] bg-gray7 text-white rounded-lg p-2">
+                                    <button onClick={closeFollowers}
+                                            className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
+                                    </button>
+                                    <div className="header">
+                                        <div>Followings</div>
+                                    </div>
+                                    <div className="users">
+                                        {followersData?.map((user, key) => (
+                                            <FollowersUserBox user={user} key={key}/>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </>
+                    )}
+                </div>
             ) : (
                 <>
                     <div className="text-text-formBtnHoverTextColor">No user found !</div>

@@ -43,7 +43,7 @@ const MyProfilePage: React.FC = () => {
             {currentUserData ? (
                 <>
                     <div className={`mainCode userDataContainer w-full flex flex-col justify-between gap-2 p-1 ${editCompanyPopup || showMessagePopup || editTitlePopup || showPostTweet ? 'opacity-5' : 'opacity-100'}`}>
-                        <UserDetails setEditTitlePopup={setEditTitlePopup} setEditCompanyPopup={setEditCompanyPopup} currentUserData={currentUserData} />
+                        <UserDetails setEditTitlePopup={setEditTitlePopup} setEditCompanyPopup={setEditCompanyPopup} currentUserData={currentUserData}  />
                         <UserPosts mes='same-user' setShowPostTweet={setShowPostTweet} showMessagePopup={showMessagePopup} setShowMessagePopup={setShowMessagePopup} setMessagePopupText={setMessagePopupText}  postData={currentUserData.posts} />
                         <UserExperiences experiencesData={currentUserData.experiences} />
                         <UserEducations educationsData={currentUserData.educations} />

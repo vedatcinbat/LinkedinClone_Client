@@ -5,10 +5,18 @@ import {User} from '@/types/types.ts';
 
 interface UserState {
     currentUser: User | null;
+    showFollowers: boolean;
+    showFollowings: boolean;
+    followersData: User[] | null;
+    followingsData: User[] | null;
 }
 
 const initialState: UserState = {
     currentUser: null,
+    showFollowers: false,
+    showFollowings: false,
+    followersData: null,
+    followingsData: null,
 };
 
 export const userSlice = createSlice({
@@ -30,10 +38,22 @@ export const userSlice = createSlice({
         },
         updateCurrentUser(state, action: PayloadAction<User>) {
             state.currentUser = action.payload;
-        }
+        },
+        setShowFollowers(state, action: PayloadAction<boolean>) {
+            state.showFollowers = action.payload;
+        },
+        setShowFollowings(state, action: PayloadAction<boolean>) {
+            state.showFollowings = action.payload;
+        },
+        setFollowersData(state, action: PayloadAction<User[]>) {
+            state.followersData = action.payload;
+        },
+        setFollowingsData(state, action: PayloadAction<User[]>) {
+            state.followingsData = action.payload;
+        },
     },
 });
 
-export const { setCurrentUser, updateCurrentUserCompany, updateCurrentUser, updateCurrentUserTitle } = userSlice.actions;
+export const { setCurrentUser, updateCurrentUserCompany, updateCurrentUser, updateCurrentUserTitle, setShowFollowings, setShowFollowers, setFollowersData, setFollowingsData } = userSlice.actions;
 
 export default userSlice.reducer;

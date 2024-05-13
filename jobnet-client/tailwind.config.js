@@ -58,6 +58,7 @@ module.exports = {
         "gray10": "#121212",
       "black1": "#000000",
       "commentBg": "#4d037f",
+      "followerUserBoxBg": "#202020",
 "black2": "#111111",
 "black3": "#222222",
 "black4": "#333333",

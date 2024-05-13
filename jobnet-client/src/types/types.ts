@@ -88,6 +88,8 @@ export interface User {
     skills: Skill[] | null;
     followers: Follow[] | null;
     following: Follow[] | null;
+    showFollowers: true | false | null;
+    showFollowings: true | false | null;
 }
 
 export interface UserSimpleType {
