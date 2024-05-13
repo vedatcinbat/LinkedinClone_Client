@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
 import UserSimpleProfileSidebar from "@/components/home/AfterLogin/UserSimpleProfileSidebar.tsx";
 import UserHomeMainContent from "@/components/home/AfterLogin/UserHomeMainContent.tsx";
-import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert.tsx";
+import {Alert, AlertDescription, AlertTitle} from "../../../components/ui/alert.tsx";
 import {RocketIcon} from "@radix-ui/react-icons";
 
 const UserHomePage = () => {

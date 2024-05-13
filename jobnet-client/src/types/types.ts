@@ -88,6 +88,22 @@ export interface User {
     following: Follow[] | null;
 }
 
+export interface UserSimpleType {
+    userId: number;
+    firstname: string;
+    lastname: string;
+    title: string;
+    email: string;
+    age: number;
+    country: string;
+    currentLanguage: string;
+    profilePictureUrl: string;
+    aboutMe: string;
+    companyId: number;
+    company: Company | null;
+}
+
+
 export interface Company {
     companyId: number;
     companyName: string;

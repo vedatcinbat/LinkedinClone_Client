@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
 import {fetchUserDataProfile} from "@/redux/user/userThunks.ts";
-import {Button} from "@/components/ui/button.tsx";
+import {Button} from "../../../components/ui/button.tsx";
 import {Link} from "react-router-dom";
 import UserDetails from "@/components/profile/UserDetails.tsx";
 import UserPosts from "@/components/profile/UserPosts.tsx";

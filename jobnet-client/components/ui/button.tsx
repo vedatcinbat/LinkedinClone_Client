@@ -2,29 +2,29 @@ import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn } from "@/lib/utils"
+import { cn } from "../../src/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  "tailwind.config.jsinline-flex tailwind.config.jsitems-center tailwind.config.jsjustify-center tailwind.config.jswhitespace-nowrap tailwind.config.jsrounded-md tailwind.config.jstext-sm tailwind.config.jsfont-medium tailwind.config.jstransition-colors focus-visible:tailwind.config.jsoutline-none focus-visible:tailwind.config.jsring-1 focus-visible:tailwind.config.jsring-slate-950 disabled:tailwind.config.jspointer-events-none disabled:tailwind.config.jsopacity-50 dark:focus-visible:tailwind.config.jsring-slate-300",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "tailwind.config.jsbg-slate-900 tailwind.config.jstext-slate-50 tailwind.config.jsshadow hover:tailwind.config.jsbg-slate-900/90 dark:tailwind.config.jsbg-slate-50 dark:tailwind.config.jstext-slate-900 dark:hover:tailwind.config.jsbg-slate-50/90",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "tailwind.config.jsbg-red-500 tailwind.config.jstext-slate-50 tailwind.config.jsshadow-sm hover:tailwind.config.jsbg-red-500/90 dark:tailwind.config.jsbg-red-900 dark:tailwind.config.jstext-slate-50 dark:hover:tailwind.config.jsbg-red-900/90",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "tailwind.config.jsborder tailwind.config.jsborder-slate-200 tailwind.config.jsbg-white tailwind.config.jsshadow-sm hover:tailwind.config.jsbg-slate-100 hover:tailwind.config.jstext-slate-900 dark:tailwind.config.jsborder-slate-800 dark:tailwind.config.jsbg-slate-950 dark:hover:tailwind.config.jsbg-slate-800 dark:hover:tailwind.config.jstext-slate-50",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "tailwind.config.jsbg-slate-100 tailwind.config.jstext-slate-900 tailwind.config.jsshadow-sm hover:tailwind.config.jsbg-slate-100/80 dark:tailwind.config.jsbg-slate-800 dark:tailwind.config.jstext-slate-50 dark:hover:tailwind.config.jsbg-slate-800/80",
+        ghost: "hover:tailwind.config.jsbg-slate-100 hover:tailwind.config.jstext-slate-900 dark:hover:tailwind.config.jsbg-slate-800 dark:hover:tailwind.config.jstext-slate-50",
+        link: "tailwind.config.jstext-slate-900 tailwind.config.jsunderline-offset-4 hover:tailwind.config.jsunderline dark:tailwind.config.jstext-slate-50",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        default: "tailwind.config.jsh-9 tailwind.config.jspx-4 tailwind.config.jspy-2",
+        sm: "tailwind.config.jsh-8 tailwind.config.jsrounded-md tailwind.config.jspx-3 tailwind.config.jstext-xs",
+        lg: "tailwind.config.jsh-10 tailwind.config.jsrounded-md tailwind.config.jspx-8",
+        icon: "tailwind.config.jsh-9 tailwind.config.jsw-9",
       },
     },
     defaultVariants: {

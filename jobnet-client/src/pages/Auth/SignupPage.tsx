@@ -3,9 +3,9 @@ import axios from 'axios';
 import {UserSignupRequest} from "@/types/types.ts";
 import {UserSignupApiRequest} from "@/types/types.ts";
 import {CoreApiPath} from "@/types/enums.ts";
-import { Button } from "@/components/ui/button"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Input } from "@/components/ui/input"
+import { Button } from "../../../components/ui/button.tsx"
+import { Alert, AlertDescription, AlertTitle } from "../../../components/ui/alert.tsx"
+import { Input } from "../../../components/ui/input.tsx"
 import {RocketIcon} from "@radix-ui/react-icons";
 
 const SignupPage: React.FC = () => {

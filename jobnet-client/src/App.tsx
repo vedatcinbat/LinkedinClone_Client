@@ -11,6 +11,7 @@ import MyProfilePage from "@/pages/Dashboard/MyProfilePage.tsx";
 import SearchCompanyPage from "@/pages/Company/SearchCompanyPage.tsx";
 import CompanyPage from "@/pages/Company/CompanyPage.tsx";
 import UserPage from "@/pages/User/UserPage.tsx";
+import ConnectionsMainPage from "@/pages/Connections/ConnectionsMainPage.tsx";
 
 const App: React.FC = () => {
     const isUserLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -27,6 +28,7 @@ const App: React.FC = () => {
                     <Route path="/companies" element={<SearchCompanyPage />} />
                     <Route path="/user/:userId" element={<UserPage />} />
                     <Route path="/companies/:companyId" element={<CompanyPage />}/>
+                    <Route path="/connections" element={<ConnectionsMainPage />} />
                 </Routes>
             </Layout>
         ) : (
@@ -37,6 +39,7 @@ const App: React.FC = () => {
                     <Route path="/companies" element={<SearchCompanyPage />} />
                     <Route path="/companies/:companyId" element={<CompanyPage />}/>
                     <Route path="/user/:userId" element={<UserPage />} />
+                    <Route path="/connections" element={<ConnectionsMainPage />} />
                 </Routes>
             </Layout>
         )}

@@ -9,7 +9,7 @@ import {
     SelectLabel,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select";
+} from "../../../components/ui/select.tsx";
 import axios from "axios";
 import {RootState} from "@/redux/store.ts";
 import {useSelector} from "react-redux";

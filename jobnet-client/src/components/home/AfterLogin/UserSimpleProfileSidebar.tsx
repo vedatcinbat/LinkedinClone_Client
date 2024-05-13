@@ -3,7 +3,7 @@ import React from "react";
 import {RootState} from "@/redux/store.ts";
 import {useSelector} from "react-redux";
 import {User} from "@/types/types.ts";
-import {Button} from "@/components/ui/button.tsx";
+import {Button} from "../../../../components/ui/button.tsx";
 import {Link} from "react-router-dom";
 
 const UserSimpleProfileSidebar = () => {

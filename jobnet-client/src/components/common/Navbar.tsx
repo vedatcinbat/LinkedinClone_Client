@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {logoutUser} from "@/redux/auth/authThunks.ts";
 import {RootState} from "@/redux/store.ts";
 //@ts-ignore
-import {Button} from "@/components/ui/button.tsx";
+import {Button} from "../../../components/ui/button.tsx";
 
 const Navbar: React.FC = () => {
     const isUserLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -50,6 +50,9 @@ const Navbar: React.FC = () => {
                         <div className={`nav-link mr-4 ${getTextColor('/')} hover:text-navbarTextColor`}>
                             <Link to="/companies">Companies</Link>
                         </div>
+                        <div className={`nav-link mr-4 ${getTextColor('/signup')}`}>
+                            <Link to="/connections">Connections</Link>
+                        </div>
                         <div className={`nav-link mr-4 ${getTextColor('/login')}`}>
                             <Link to="/login">Login</Link>
                         </div>
@@ -78,6 +81,9 @@ const Navbar: React.FC = () => {
                     </div>
                     <div className={`nav-link ${getTextColor('/')} mr-4 hover:text-navbarTextColor`}>
                         <Link to="/companies">Companies</Link>
+                    </div>
+                    <div className={`nav-link mr-4 ${getTextColor('/signup')}`}>
+                        <Link to="/connections">Connections</Link>
                     </div>
                     <div className={`nav-link ${getTextColor('/')} mr-4 hover:text-navbarTextColor`}>
                         <Link to="/my-profile">Profile</Link>

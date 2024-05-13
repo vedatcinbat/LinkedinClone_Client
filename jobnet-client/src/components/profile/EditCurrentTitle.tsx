@@ -7,12 +7,14 @@ import {updateCurrentUserTitle} from "@/redux/user/userSlice.ts";
 //@ts-ignore
 const EditCurrentTitle = ({setEditTitlePopup, setShowMessagePopup, setMessagePopupText, setCurrentTitle, currentTitle}) => {
 
+    const currentUserId = useSelector((state: RootState) => state.auth.userId);
     const userAuthData = useSelector((state: RootState) => state.auth);
     const token = userAuthData.accessToken;
+
     const dispatch = useDispatch();
 
     const UpdateCurrentTitle = () => {
-        const url = `http://localhost:5087/api/users/1/updateTitle/${currentTitle}`;
+        const url = `http://localhost:5087/api/users/${currentUserId}/updateTitle/${currentTitle}`;
         axios.patch(
             url,
             null,
