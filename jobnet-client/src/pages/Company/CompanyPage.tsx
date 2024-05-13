@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {Company} from "@/types/types.ts";
 import {Link, useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {RootState} from "@/redux/store.ts";
 interface CompanyParams {
     companyId: string;
 }
@@ -10,7 +12,7 @@ interface CompanyParams {
 const CompanyPage: React.FC = () => {
     //@ts-ignore
     const { companyId } = useParams<CompanyParams>();
-
+    const currentUserId = useSelector((state: RootState) => state.auth.userId);
     const [companyData, setCompanyData] = useState<Company | null>(null);
     const reqUrl = `http://localhost:5087/api/Company/${companyId}`;
 
@@ -26,7 +28,11 @@ const CompanyPage: React.FC = () => {
 
 
     const goToUserPage = (userId: string): string => {
-        return `http://localhost:5173/user/${userId}`;
+        if(currentUserId?.toString() !== userId) {
+            return `http://localhost:5173/user/${userId}`;
+        }else {
+            return `http://localhost:5173/my-profile`;
+        }
     }
 
 
@@ -63,7 +69,7 @@ const CompanyPage: React.FC = () => {
                     </div>
                     <div className="EmployeesHere mt-2 bg-gray8 w-full h-[40vh] flex justify-center items-center rounded-xl">
                         {companyData.talentManagers?.length !== 0 ? (
-                            <div className="talentManagers flex justify-center gap-2 overflow-x-auto">
+                            <div className="talentManagers flex justify-center gap-2 overflow-x-auto text-center">
                                 {companyData.talentManagers?.map((emp) => (
                                     <Link to={goToUserPage(emp.userId.toString())}>
                                         <div

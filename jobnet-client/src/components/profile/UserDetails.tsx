@@ -24,9 +24,6 @@ const UserDetails: React.FC<UserDetailsProps> = ({setAmIFollow, amIFollow, userI
     const token = useSelector((state: RootState) => state.auth.accessToken);
     const dispatch = useDispatch();
 
-    const [followerUsers, setFollowerUsers] = useState<User[] | []>([]);
-    const [followingUsers, setFollowingUsers] = useState<User[] | []>([]);
-
     const handleFollowUnfollow = () => {
         if(amIFollow && setAmIFollow) {
             const baseUrl = `http://localhost:5087/api/Follow/${currentUserId}/unfollow/${userId}`;
@@ -73,9 +70,8 @@ const UserDetails: React.FC<UserDetailsProps> = ({setAmIFollow, amIFollow, userI
         const baseUrl = `http://localhost:5087/api/users/${userId}/followers`;
 
         axios.get(`${baseUrl}`).then((res) => {
-            console.log(res.data);
-            setFollowerUsers(res.data);
-            dispatch(setFollowersData(followerUsers));
+
+            dispatch(setFollowersData(res.data));
             dispatch(setShowFollowers(true));
         }).catch(err => {
             console.log(err);
@@ -86,9 +82,9 @@ const UserDetails: React.FC<UserDetailsProps> = ({setAmIFollow, amIFollow, userI
         const baseUrl = `http://localhost:5087/api/users/${userId}/followings`;
 
         axios.get(`${baseUrl}`).then((res) => {
-            setFollowingUsers(res.data);
+
             dispatch(setShowFollowings(true));
-            dispatch(setFollowingsData(followingUsers));
+            dispatch(setFollowingsData(res.data));
         }).catch(err => {
             console.log(err);
         })

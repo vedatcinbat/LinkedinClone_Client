@@ -49,7 +49,7 @@ const UserPage = () => {
             console.log(err);
             setUserData(null);
         }
-    }, []);
+    }, [followersData, followingsData, amIFollow]);
 
     const closeFollowers = () => {
         dispatch(setShowFollowers(false));
