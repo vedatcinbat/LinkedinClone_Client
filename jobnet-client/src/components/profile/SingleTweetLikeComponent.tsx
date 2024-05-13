@@ -11,9 +11,11 @@ interface PostInterface {
     showMessagePopup?: boolean;
     setMessagePopupText?: React.Dispatch<React.SetStateAction<string>>;
     setShowMessagePopup?: React.Dispatch<React.SetStateAction<boolean>>;
+    publisherUser?: string;
+    mes?: string;
 }
 
-const SingleTweetLikeComponent: React.FC<PostInterface> = ({post, setMessagePopupText, setShowMessagePopup}) => {
+const SingleTweetLikeComponent: React.FC<PostInterface> = ({mes, publisherUser, post, setMessagePopupText, setShowMessagePopup}) => {
     const currentUser = useSelector((state: RootState) => state.user.currentUser);
     const authData = useSelector((state: RootState) => state.auth);
     const token = authData.accessToken;
@@ -21,7 +23,9 @@ const SingleTweetLikeComponent: React.FC<PostInterface> = ({post, setMessagePopu
     const dispatch = useDispatch();
     //const currentUserData = useSelector((state: RootState) => state.user.currentUser);
 
-    const deletePost = (postId: number) => {
+    const deletePost = () => {
+        const postId = post.postId;
+
         if(setShowMessagePopup && setMessagePopupText && setShowMessagePopup) {
             const url = `http://localhost:5087/api/Post/deletePost/${postId}`;
 
@@ -59,18 +63,18 @@ const SingleTweetLikeComponent: React.FC<PostInterface> = ({post, setMessagePopu
         const formattedDate = `${day}/${month}/${year} ${hour}:${minute}`;
         return formattedDate;
     }
-
+    console.log(post);
     return (
         <div
             onMouseOver={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             className={`w-[50vh] mb-2 h-[23vh] bg-gray8 text-formBtnHoverTextColor rounded-xl p-1 flex flex-col justify-between items-center relative`}>
             <button
-                onClick={() => deletePost(post.postId)}
-                className={`absolute -top-2 -right-5 bg-alertErrorBgColor text-alertErrorTextColor p-2 rounded-2xl ${isHovered && setShowMessagePopup ? 'opacity-100' : 'opacity-0'}`}>Delete</button>
+                onClick={deletePost}
+                className={`absolute -top-2 -right-5 bg-alertErrorBgColor text-alertErrorTextColor p-2 rounded-2xl ${isHovered && mes == 'same-user' ? 'opacity-100' : 'hidden'}`}>Delete</button>
             <div className="publisherInformation flex h-[10vh] mb-2 rounded-lg gap-2 justify-evenly items-center bg-gray7 w-full">
                 <div className="text-gray6">({SimpleDate(post.publishTime)})</div>
-                <div className="">{currentUser?.firstname} {currentUser?.lastname}</div>
+                <div className="">{publisherUser ? `${publisherUser.toString()}` : `${currentUser?.firstname}`}</div>
                 <div>{currentUser?.company?.companyName}</div>
             </div>
             <div className="mainContent bg-commentBg w-full p-4 border border-sidebarBorderColor rounded-xl h-[30vh] overflow-hidden">

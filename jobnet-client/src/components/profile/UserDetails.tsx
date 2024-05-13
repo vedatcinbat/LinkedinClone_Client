@@ -20,6 +20,7 @@ interface UserDetailsProps {
 const UserDetails: React.FC<UserDetailsProps> = ({setAmIFollow, amIFollow, userId, mes, currentUserData, setEditCompanyPopup, setEditTitlePopup}) => {
 
     const currentUserId = useSelector((state: RootState) => state.auth.userId);
+    const isUserLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
     const token = useSelector((state: RootState) => state.auth.accessToken);
     const dispatch = useDispatch();
 
@@ -141,13 +142,18 @@ const UserDetails: React.FC<UserDetailsProps> = ({setAmIFollow, amIFollow, userI
                     </div>
                 </div>
                 {mes === 'another-user' && (
-                    <div className="text-center ml-4 bg-gray7 p-3 rounded-xl">
-                        <div className="followUnfollowArea flex justify-evenly items-center h-[7vh] w-[20vh]">
-                            <button
-                                onClick={handleFollowUnfollow}
-                                className="bg-mainBgColor text-white w-[10vh] h-[6vh] rounded-2xl">{amIFollow ? 'Unfollow' : 'Follow'}</button>
-                        </div>
-                    </div>
+                    <>
+                        {isUserLoggedIn && (
+                            <div className="text-center ml-4 bg-gray7 p-3 rounded-xl">
+                                <div className="followUnfollowArea flex justify-evenly items-center h-[7vh] w-[20vh]">
+                                    <button
+                                        onClick={handleFollowUnfollow}
+                                        className="bg-mainBgColor text-white w-[10vh] h-[6vh] rounded-2xl">{amIFollow ? 'Unfollow' : 'Follow'}</button>
+                                </div>
+                            </div>
+
+                        )}
+                    </>
                 )}
                 {currentUserData.aboutMe && (
                     <div className="text-center ml-4 bg-gray7 p-3 rounded-xl">

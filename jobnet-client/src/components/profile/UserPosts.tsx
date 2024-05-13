@@ -9,11 +9,12 @@ interface UserPostsProps {
     setShowMessagePopup?: React.Dispatch<React.SetStateAction<boolean>>;
     setShowPostTweet?: React.Dispatch<React.SetStateAction<boolean>>;
     mes: string;
+    publisherUser?: string;
 }
 
-const UserPosts: React.FC<UserPostsProps> = ({mes, setShowPostTweet, postData, showMessagePopup, setMessagePopupText, setShowMessagePopup}) => {
+const UserPosts: React.FC<UserPostsProps> = ({publisherUser, mes, setShowPostTweet, postData, showMessagePopup, setMessagePopupText, setShowMessagePopup}) => {
 
-    console.log(postData);
+
     return (
         <>
             {mes === 'same-user' ? (
@@ -40,11 +41,13 @@ const UserPosts: React.FC<UserPostsProps> = ({mes, setShowPostTweet, postData, s
                                         {post.textContent && (
                                             <>
                                                 {(setShowMessagePopup && setMessagePopupText && showMessagePopup) ? (
-                                                        <SingleTweetLikeComponent setShowMessagePopup={setShowMessagePopup}
+                                                        <SingleTweetLikeComponent
+                                                            mes={mes}
+                                                            setShowMessagePopup={setShowMessagePopup}
                                                                                   setMessagePopupText={setMessagePopupText}
                                                                                   showMessagePopup={showMessagePopup}
                                                                                   post={post}/>) :
-                                                    (<SingleTweetLikeComponent post={post}/>)
+                                                    (<SingleTweetLikeComponent mes={mes} post={post}/>)
                                                 }
                                             </>
                                         )}
@@ -68,11 +71,12 @@ const UserPosts: React.FC<UserPostsProps> = ({mes, setShowPostTweet, postData, s
                                         {post.textContent && (
                                             <>
                                                 {(setShowMessagePopup && setMessagePopupText && showMessagePopup) ? (
-                                                        <SingleTweetLikeComponent setShowMessagePopup={setShowMessagePopup}
+                                                        <SingleTweetLikeComponent mes={mes} publisherUser={publisherUser}
+                                                            setShowMessagePopup={setShowMessagePopup}
                                                                                   setMessagePopupText={setMessagePopupText}
                                                                                   showMessagePopup={showMessagePopup}
                                                                                   post={post}/>) :
-                                                    (<SingleTweetLikeComponent post={post}/>)
+                                                    (<SingleTweetLikeComponent mes={mes} post={post} publisherUser={publisherUser} />)
                                                 }
                                             </>
                                         )}

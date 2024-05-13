@@ -61,8 +61,6 @@ const UserPage = () => {
         dispatch(setFollowingsData([]));
     }
 
-    console.log(followersData)
-
     return(
         <>
             {userData !== null ? (
@@ -70,7 +68,7 @@ const UserPage = () => {
                     <div
                         className={`mainCode userDataContainer w-full flex flex-col justify-between gap-2 p-1 ${showFollowers || showFollowings ? 'opacity-15' : 'opacity-100'}`}>
                         <UserDetails setAmIFollow={setAmIFollow} amIFollow={amIFollow} userId={userId} currentUserData={userData} mes={(currentUserId?.toString() !== userId) ? 'another-user' : 'same-user'}  />
-                        <UserPosts postData={userData.posts} mes={(currentUserId?.toString() !== userId) ? 'another-user' : 'same-user'} />
+                        <UserPosts publisherUser={`${userData.firstname} ${userData.lastname}`} postData={userData.posts} mes={(currentUserId?.toString() !== userId) ? 'another-user' : 'same-user'} />
                         <UserExperiences experiencesData={userData.experiences} />
                         <UserEducations educationsData={userData.educations} />
                         <Skills skills={userData.skills} mes={(currentUserId?.toString() !== userId) ? 'another-user' : 'same-user'}  />
@@ -126,7 +124,7 @@ const UserPage = () => {
                             ) : (
                                 <div
                                     className="absolute top-[10%] left-[30%] w-[70vh] h-[85vh] bg-gray7 text-white rounded-lg p-2">
-                                    <button onClick={closeFollowers}
+                                    <button onClick={closeFollowings}
                                             className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
                                     </button>
                                     <div className="header">
