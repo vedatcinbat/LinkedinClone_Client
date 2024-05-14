@@ -19,6 +19,7 @@ const SearchCompanyBox: React.FC<CompanyProps> = ({company}) => {
                 <div className="companyDescription text-lg text-gray5">Found : {company.foundedAt.toString()}</div>
                 <div className="companyDescription text-lg text-gray5">Work here
                     : {company.talentManagers?.length}</div>
+                <div className="openJobs">AvailableJobs : {company.currentAvailableJobs?.length}</div>
             </div>
         </Link>
     )

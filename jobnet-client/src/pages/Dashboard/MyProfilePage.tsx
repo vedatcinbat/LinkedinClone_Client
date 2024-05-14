@@ -15,6 +15,7 @@ import EditCurrentTitle from "@/components/profile/EditCurrentTitle.tsx";
 import CreatePost from "@/components/profile/CreatePost.tsx";
 import FollowersUserBox from "@/components/Connections/FollowersUserBox.tsx";
 import {setFollowersData, setFollowingsData, setShowFollowers, setShowFollowings} from "@/redux/user/userSlice.ts";
+import PostJob from "@/components/profile/PostJob.tsx";
 
 const MyProfilePage: React.FC = () => {
 
@@ -34,6 +35,7 @@ const MyProfilePage: React.FC = () => {
     let showFollowings = useSelector((state: RootState) => state.user.showFollowings);
     const followersData = useSelector((state: RootState) => state.user.followersData);
     const followingsData = useSelector((state: RootState) => state.user.followingsData);
+    const showPostJob = useSelector((state: RootState) => state.user.showJob);
 
     useEffect(() => {
         if(userId) {
@@ -57,7 +59,7 @@ const MyProfilePage: React.FC = () => {
         <div>
             {currentUserData ? (
                 <>
-                    <div className={`mainCode userDataContainer w-full flex flex-col justify-between gap-2 p-1 ${editCompanyPopup || showMessagePopup || editTitlePopup || showPostTweet || showFollowers || showFollowings ? 'opacity-5' : 'opacity-100'}`}>
+                    <div className={`mainCode userDataContainer w-full flex flex-col justify-between gap-2 p-1 ${showPostJob || editCompanyPopup || showMessagePopup || editTitlePopup || showPostTweet || showFollowers || showFollowings ? 'opacity-5' : 'opacity-100'}`}>
                         <UserDetails userId={currentUserData.userId.toString()} setEditTitlePopup={setEditTitlePopup} setEditCompanyPopup={setEditCompanyPopup} currentUserData={currentUserData}  />
                         <UserPosts mes='same-user' setShowPostTweet={setShowPostTweet} showMessagePopup={showMessagePopup} setShowMessagePopup={setShowMessagePopup} setMessagePopupText={setMessagePopupText}  postData={currentUserData.posts} />
                         <UserExperiences experiencesData={currentUserData.experiences} />
@@ -67,6 +69,11 @@ const MyProfilePage: React.FC = () => {
                     {editCompanyPopup && (
                         <div className={`w-[80vh] h-[90vh] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-commentBg ${showMessagePopup ? 'opacity-35' : 'opacity-100'}`}>
                             <EditCurrentCompany setShowMessagePopup={setShowMessagePopup} setMessagePopupText={setMessagePopupText} setEditCompanyPopup={setEditCompanyPopup} />
+                        </div>
+                    )}
+                    {showPostJob && (
+                        <div className="w-[80vh] h-[80vh] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-sidebarBorderColor">
+                            <PostJob />
                         </div>
                     )}
                     {editTitlePopup && (

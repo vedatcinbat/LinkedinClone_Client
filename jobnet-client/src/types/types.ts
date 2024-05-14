@@ -18,6 +18,17 @@ export interface UserSignupRequest {
     gender: string;
 }
 
+export interface CreateJobRequest {
+    jobTitle: string;
+    jobType: string;
+    jobEmployeeLevel: string;
+    description: string;
+    location: string;
+    postedAt: string | null;
+    deadline: string | null;
+    companyId: number;
+}
+
 // Request Type For Api Calls
 export interface UserSignupApiRequest {
     firstname: string;

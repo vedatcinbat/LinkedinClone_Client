@@ -7,6 +7,7 @@ interface UserState {
     currentUser: User | null;
     showFollowers: boolean;
     showFollowings: boolean;
+    showJob: boolean;
     followersData: User[] | null;
     followingsData: User[] | null;
 }
@@ -17,6 +18,7 @@ const initialState: UserState = {
     showFollowings: false,
     followersData: null,
     followingsData: null,
+    showJob: false,
 };
 
 export const userSlice = createSlice({
@@ -36,6 +38,9 @@ export const userSlice = createSlice({
                 state.currentUser.title = action.payload;
             }
         },
+        setShowJob(state, action: PayloadAction<boolean>) {
+            state.showJob = action.payload;
+        },
         updateCurrentUser(state, action: PayloadAction<User>) {
             state.currentUser = action.payload;
         },
@@ -54,6 +59,6 @@ export const userSlice = createSlice({
     },
 });
 
-export const { setCurrentUser, updateCurrentUserCompany, updateCurrentUser, updateCurrentUserTitle, setShowFollowings, setShowFollowers, setFollowersData, setFollowingsData } = userSlice.actions;
+export const { setShowJob, setCurrentUser, updateCurrentUserCompany, updateCurrentUser, updateCurrentUserTitle, setShowFollowings, setShowFollowers, setFollowersData, setFollowingsData } = userSlice.actions;
 
 export default userSlice.reducer;
