@@ -28,7 +28,7 @@ const UserSimpleProfileBox: React.FC<UserSimpleProfileBoxProps> = ({user, key}) 
                 </div>
                 <div className="titleAndCompany flex flex-col justify-center items-center text-center">
                     <div>{user.title && user.title}</div>
-                    <div>({user.company && user.company.companyName})</div>
+                    <div>{user.company && (user.company.companyName)}</div>
                 </div>
                 {user.aboutMe && (
                     <div className="aboutMe">

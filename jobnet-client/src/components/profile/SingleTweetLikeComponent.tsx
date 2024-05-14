@@ -23,10 +23,8 @@ const SingleTweetLikeComponent: React.FC<PostInterface> = ({mes, publisherUser, 
     const dispatch = useDispatch();
     //const currentUserData = useSelector((state: RootState) => state.user.currentUser);
 
-    const deletePost = () => {
-        const postId = post.postId;
-
-        if(setShowMessagePopup && setMessagePopupText && setShowMessagePopup) {
+    const deletePost = (postId: string) => {
+        if(setShowMessagePopup && setMessagePopupText) {
             const url = `http://localhost:5087/api/Post/deletePost/${postId}`;
 
             axios.delete(
@@ -44,7 +42,6 @@ const SingleTweetLikeComponent: React.FC<PostInterface> = ({mes, publisherUser, 
                 setTimeout(() => {
                     setShowMessagePopup(false);
                 }, 3000);
-
                 //@ts-ignore
                 dispatch(fetchUserDataProfile(currentUser?.userId));
             }).catch(err => {
@@ -70,7 +67,7 @@ const SingleTweetLikeComponent: React.FC<PostInterface> = ({mes, publisherUser, 
             onMouseLeave={() => setIsHovered(false)}
             className={`w-[50vh] mb-2 h-[23vh] bg-gray8 text-formBtnHoverTextColor rounded-xl p-1 flex flex-col justify-between items-center relative`}>
             <button
-                onClick={deletePost}
+                onClick={() => deletePost(post.postId.toString())}
                 className={`absolute -top-2 -right-5 bg-alertErrorBgColor text-alertErrorTextColor p-2 rounded-2xl ${isHovered && mes == 'same-user' ? 'opacity-100' : 'hidden'}`}>Delete</button>
             <div className="publisherInformation flex h-[10vh] mb-2 rounded-lg gap-2 justify-evenly items-center bg-gray7 w-full">
                 <div className="text-gray6">({SimpleDate(post.publishTime)})</div>

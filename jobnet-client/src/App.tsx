@@ -12,6 +12,7 @@ import SearchCompanyPage from "@/pages/Company/SearchCompanyPage.tsx";
 import CompanyPage from "@/pages/Company/CompanyPage.tsx";
 import UserPage from "@/pages/User/UserPage.tsx";
 import ConnectionsMainPage from "@/pages/Connections/ConnectionsMainPage.tsx";
+import JobsMainPage from "@/pages/Jobs/JobsMainPage.tsx";
 
 const App: React.FC = () => {
     const isUserLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -29,6 +30,7 @@ const App: React.FC = () => {
                     <Route path="/user/:userId" element={<UserPage />} />
                     <Route path="/companies/:companyId" element={<CompanyPage />}/>
                     <Route path="/connections" element={<ConnectionsMainPage />} />
+                    <Route path="/jobs" element={<JobsMainPage />} />
                 </Routes>
             </Layout>
         ) : (
@@ -40,6 +42,7 @@ const App: React.FC = () => {
                     <Route path="/companies/:companyId" element={<CompanyPage />}/>
                     <Route path="/user/:userId" element={<UserPage />} />
                     <Route path="/connections" element={<ConnectionsMainPage />} />
+                    <Route path="/jobs" element={<JobsMainPage />} />
                 </Routes>
             </Layout>
         )}

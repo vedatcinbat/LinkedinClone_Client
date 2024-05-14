@@ -40,14 +40,19 @@ const UserPosts: React.FC<UserPostsProps> = ({publisherUser, mes, setShowPostTwe
                                     <div key={key}>
                                         {post.textContent && (
                                             <>
-                                                {(setShowMessagePopup && setMessagePopupText && showMessagePopup) ? (
+                                                {(setShowMessagePopup && setMessagePopupText) ? (
                                                         <SingleTweetLikeComponent
                                                             mes={mes}
                                                             setShowMessagePopup={setShowMessagePopup}
                                                                                   setMessagePopupText={setMessagePopupText}
                                                                                   showMessagePopup={showMessagePopup}
                                                                                   post={post}/>) :
-                                                    (<SingleTweetLikeComponent mes={mes} post={post}/>)
+                                                    (<SingleTweetLikeComponent
+                                                        mes={mes}
+                                                        setShowMessagePopup={setShowMessagePopup}
+                                                        setMessagePopupText={setMessagePopupText}
+                                                        showMessagePopup={showMessagePopup}
+                                                        post={post}/>)
                                                 }
                                             </>
                                         )}

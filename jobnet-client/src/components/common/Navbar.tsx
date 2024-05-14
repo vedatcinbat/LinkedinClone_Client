@@ -53,6 +53,9 @@ const Navbar: React.FC = () => {
                         <div className={`nav-link mr-4 ${getTextColor('/signup')}`}>
                             <Link to="/connections">Connections</Link>
                         </div>
+                        <div className={`nav-link mr-4 ${getTextColor('/signup')}`}>
+                            <Link to="/jobs">Jobs</Link>
+                        </div>
                         <div className={`nav-link mr-4 ${getTextColor('/login')}`}>
                             <Link to="/login">Login</Link>
                         </div>
@@ -84,6 +87,9 @@ const Navbar: React.FC = () => {
                     </div>
                     <div className={`nav-link mr-4 ${getTextColor('/signup')}`}>
                         <Link to="/connections">Connections</Link>
+                    </div>
+                    <div className={`nav-link mr-4 ${getTextColor('/signup')}`}>
+                        <Link to="/jobs">Jobs</Link>
                     </div>
                     <div className={`nav-link ${getTextColor('/')} mr-4 hover:text-navbarTextColor`}>
                         <Link to="/my-profile">Profile</Link>
