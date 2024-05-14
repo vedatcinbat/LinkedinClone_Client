@@ -210,17 +210,16 @@ export interface Follow {
 export interface Job {
     jobId: number;
     jobTitle: string;
-    jobType: string;
     jobEmployeeLevel: string;
     description: string;
     location: string;
     postedAt: Date;
     deadline: Date;
     publisherId: number;
-    publisher: User;
+    publisherUser: User;
     companyId?: number;
     company: Company;
-    appliedUsers: User[] | null;
+    aplliedUserCount: number;
 }
 
 export interface Like {
