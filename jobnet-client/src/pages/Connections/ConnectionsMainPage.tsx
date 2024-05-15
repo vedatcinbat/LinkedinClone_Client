@@ -54,7 +54,7 @@ const ConnectionsMainPage: React.FC = () => {
                     <div className="header text-2xl font-bold">All Users</div>
                     <div className="mainContent">
                         <div className="inputArea">
-                            <input type="text" className="p-4 rounded-xl text-xl" placeholder="Vedat..." />
+                            <input type="text" className="p-4 rounded-xl text-xl" placeholder="Name..." />
                         </div>
                     </div>
                     <div className="allUsers grid grid-cols-6 gap-4 mt-4 w-full p-2">

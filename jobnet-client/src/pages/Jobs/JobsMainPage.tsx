@@ -36,7 +36,7 @@ const JobsMainPage: React.FC = () => {
                 }
             }
         ).then(res => {
-            alert("Job applied successfully")
+            alert(`Job applied successfully ${res.data.jobTitle}`)
         }).catch(err => {
             console.log(err);
         })
@@ -78,7 +78,7 @@ const JobsMainPage: React.FC = () => {
                                                 <div>{selectedJob.description}</div>
                                             </div>
                                             <div className="p-4 absolute bottom-3 left-[43%] bg-white rounded-xl text-black hover:bg-mainBgColor hover:text-white">
-                                                <button onClick={() => applyJob(selectedJob.jobId.toString())} className="w-[7vh]">Apply</button>
+                                                <button onClick={() => applyJob(selectedJob?.jobId.toString())} className="w-[7vh]">Apply</button>
                                             </div>
                                         </div>
                                     </div>

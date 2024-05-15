@@ -88,7 +88,7 @@ const PostJob: React.FC = () => {
             return;
         }
         console.log(createJobApiRequest)
-        const postJobUrl = `http://localhost:5087/addJob`;
+        const postJobUrl = `http://localhost:5087/api/Job/addJob`;
 
         axios
             .post(postJobUrl, createJobApiRequest, {
