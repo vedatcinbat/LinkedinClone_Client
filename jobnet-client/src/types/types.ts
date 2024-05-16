@@ -118,6 +118,39 @@ export interface UserSimpleType {
     company: Company | null;
 }
 
+export interface ConnectionsPost {
+    postId: number;
+    isDeleted: boolean;
+    userId: number;
+    user: ConnectionsPostUser | null;
+    publishTime: Date;
+    caption: string;
+    postType: PostType;
+    textContent: string | null;
+    imageContent: string | null;
+    imagesContent: string | null;
+    commentCount: number;
+    likeCount: number;
+}
+
+export interface ConnectionsPostUser {
+    userId: number;
+    firstname: string;
+    lastname: string;
+    title: string;
+    profilePictureUrl: string;
+    isDeleted: boolean;
+    companyId: number | null;
+    company: UserPostCompanySimpleResponse | null;
+}
+
+export interface UserPostCompanySimpleResponse {
+    companyId: number;
+    companyName: string;
+    industry: CompanyIndustry;
+    logoUrl: string;
+}
+
 export interface UserDetailType {
     firstname: string;
     lastname: string;

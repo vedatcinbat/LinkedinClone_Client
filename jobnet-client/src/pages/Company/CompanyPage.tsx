@@ -97,7 +97,7 @@ const CompanyPage: React.FC = () => {
                                     <div
                                         className="bg-gray3 text-black w-[35vh] h-[30vh] rounded-xl flex flex-col items-center justify-evenly cursor-pointer">
                                         <div className="text-xl">{job.jobTitle}</div>
-                                        <div className="text-md text-gray9">{job.jobType} o {job.jobEmployeeLevel}</div>
+                                        <div className="text-md text-gray9">{job.jobEmployeeLevel}</div>
                                         <div className="text-md text-gray9">{job.location}</div>
                                         <div className="text-md text-gray9">{job.description.substring(0, 20)}</div>
                                         <div className="text-md text-gray9">{job.publisherId}</div>

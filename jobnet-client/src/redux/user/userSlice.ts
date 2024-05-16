@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // @ts-ignore
 import { RootState } from '../store';
-import {User} from '@/types/types.ts';
+import {ConnectionsPost, User} from '@/types/types.ts';
 
 interface UserState {
     currentUser: User | null;
@@ -10,6 +10,7 @@ interface UserState {
     showJob: boolean;
     followersData: User[] | null;
     followingsData: User[] | null;
+    connectionPosts: ConnectionsPost[] | [];
 }
 
 const initialState: UserState = {
@@ -19,6 +20,7 @@ const initialState: UserState = {
     followersData: null,
     followingsData: null,
     showJob: false,
+    connectionPosts: [],
 };
 
 export const userSlice = createSlice({
@@ -56,9 +58,12 @@ export const userSlice = createSlice({
         setFollowingsData(state, action: PayloadAction<User[]>) {
             state.followingsData = action.payload;
         },
+        setConnectionsPosts(state, action: PayloadAction<ConnectionsPost[]>) {
+            state.connectionPosts = action.payload;
+        }
     },
 });
 
-export const { setShowJob, setCurrentUser, updateCurrentUserCompany, updateCurrentUser, updateCurrentUserTitle, setShowFollowings, setShowFollowers, setFollowersData, setFollowingsData } = userSlice.actions;
+export const {setConnectionsPosts, setShowJob, setCurrentUser, updateCurrentUserCompany, updateCurrentUser, updateCurrentUserTitle, setShowFollowings, setShowFollowers, setFollowersData, setFollowingsData } = userSlice.actions;
 
 export default userSlice.reducer;
