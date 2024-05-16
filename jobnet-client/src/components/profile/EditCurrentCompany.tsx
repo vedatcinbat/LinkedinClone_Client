@@ -49,7 +49,7 @@ const EditCurrentCompany = ({setEditCompanyPopup, setMessagePopupText, setShowMe
 
                 setTimeout(() => {
                     setShowMessagePopup(false);
-                }, 3000);
+                }, 2000);
             })
             .catch((err) => {
                 console.log(err);

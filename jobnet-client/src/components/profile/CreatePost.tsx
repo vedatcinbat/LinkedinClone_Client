@@ -45,7 +45,7 @@ const CreatePost: React.FC<CreatePostProps> = ({setShowPostTweet, setShowMessage
 
             setTimeout(() => {
                 setShowMessagePopup(false);
-            }, 3000);
+            }, 2000);
 
         }).catch((err) => {
             console.log(err);

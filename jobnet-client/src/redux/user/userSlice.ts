@@ -5,6 +5,7 @@ import {ConnectionsPost, User} from '@/types/types.ts';
 
 interface UserState {
     currentUser: User | null;
+    currentUserTitle: string;
     currentUserCompany: string;
     showFollowers: boolean;
     showFollowings: boolean;
@@ -22,7 +23,8 @@ const initialState: UserState = {
     followingsData: null,
     showJob: false,
     connectionPosts: [],
-    currentUserCompany: ""
+    currentUserCompany: "",
+    currentUserTitle: ""
 };
 
 export const userSlice = createSlice({
@@ -32,13 +34,11 @@ export const userSlice = createSlice({
         setCurrentUser(state, action: PayloadAction<User | null>) {
             state.currentUser = action.payload;
         },
+        updateCurrentUserTitle(state, action: PayloadAction<string>) {
+            state.currentUserTitle = action.payload;
+        },
         updateCurrentUserCompany(state, action: PayloadAction<string>) {
             state.currentUserCompany = action.payload;
-        },
-        updateCurrentUserTitle(state, action: PayloadAction<string>) {
-            if(state.currentUser && state.currentUser.title) {
-                state.currentUser.title = action.payload;
-            }
         },
         setShowJob(state, action: PayloadAction<boolean>) {
             state.showJob = action.payload;

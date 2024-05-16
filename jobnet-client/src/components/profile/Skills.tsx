@@ -72,7 +72,7 @@ const Skills: React.FC<SkillProps> = ({skills, mes}) => {
                 setShowMessage(true);
                 setTimeout(() => {
                     setShowMessage(false);
-                }, 3000);
+                }, 2000);
             })
             .catch((error) => {
                 console.error(error);
