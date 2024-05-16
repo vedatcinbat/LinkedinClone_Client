@@ -24,13 +24,13 @@ const MyProfilePage: React.FC = () => {
     const [messagePopupText, setMessagePopupText] = useState<string>('');
     const [editTitlePopup, setEditTitlePopup] = useState(false);
     const [currentTitle, setCurrentTitle] = useState<string>('');
-
     const [showPostTweet, setShowPostTweet] = useState(false);
 
 
     const dispatch = useDispatch();
     const userId = useSelector((state: RootState) => state.auth.userId);
     const currentUserData = useSelector((state: RootState) => state.user.currentUser);
+
     let showFollowers = useSelector((state: RootState) => state.user.showFollowers);
     let showFollowings = useSelector((state: RootState) => state.user.showFollowings);
     const followersData = useSelector((state: RootState) => state.user.followersData);

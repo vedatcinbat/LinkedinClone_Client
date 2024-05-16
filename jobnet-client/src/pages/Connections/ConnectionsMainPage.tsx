@@ -22,7 +22,6 @@ const ConnectionsMainPage: React.FC = () => {
         axios.get(`${url}`).then((res) => {
             const allUsers: UserSimpleType[] = res.data;
             setAllUsers(allUsers);
-            console.log(allUsers);
         }).catch(err => {
             console.log(err);
         })

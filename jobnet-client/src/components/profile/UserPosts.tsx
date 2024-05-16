@@ -14,7 +14,6 @@ interface UserPostsProps {
 
 const UserPosts: React.FC<UserPostsProps> = ({publisherUser, mes, setShowPostTweet, postData, showMessagePopup, setMessagePopupText, setShowMessagePopup}) => {
 
-
     return (
         <>
             {mes === 'same-user' ? (

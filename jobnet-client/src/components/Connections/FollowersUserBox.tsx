@@ -7,7 +7,6 @@ interface FollowersUserBoxProps {
 }
 
 const FollowersUserBox: React.FC<FollowersUserBoxProps> = ({user, key}) => {
-    console.log(user);
     return(
         <div key={key} className="w-full h-[10vh] bg-mainBgColor text-white rounded-xl flex justify-start items-center gap-2 p-2">
             <div className="profileImg mr-[10vh]">

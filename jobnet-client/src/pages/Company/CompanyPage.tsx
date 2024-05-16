@@ -19,7 +19,6 @@ const CompanyPage: React.FC = () => {
     useEffect(() => {
         axios.get(`${reqUrl}`).then(res => {
             setCompanyData(res.data);
-            console.log(res.data)
         }).catch(err => {
             console.log(err);
             setCompanyData(null);

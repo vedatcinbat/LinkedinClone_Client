@@ -5,7 +5,7 @@ import axios from "axios";
 import UpdateCompanyBox from "@/components/company/UpdateCompanyBox.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
-import {updateCurrentUserCompany} from "@/redux/user/userSlice.ts";
+import {updateUserProfile} from "@/redux/user/userThunks.ts";
 //@ts-ignore
 const EditCurrentCompany = ({setEditCompanyPopup, setMessagePopupText, setShowMessagePopup}) => {
 
@@ -15,6 +15,7 @@ const EditCurrentCompany = ({setEditCompanyPopup, setMessagePopupText, setShowMe
     const userAuthData = useSelector((state: RootState) => state.auth);
     const token = userAuthData.accessToken;
     const dispatch = useDispatch();
+    const currentUserId = useSelector((state: RootState) => state.auth.userId);
 
 
     useEffect(() => {
@@ -40,7 +41,8 @@ const EditCurrentCompany = ({setEditCompanyPopup, setMessagePopupText, setShowMe
         )
             .then(() => {
                 // Dispatch action to update current user company information
-                dispatch(updateCurrentUserCompany(currentCompanyId));
+                // @ts-ignore
+                dispatch(updateUserProfile(currentUserId));
 
                 setEditCompanyPopup(false);
                 setMessagePopupText(`Now you are working at CompanyId : ${currentCompanyId}`)

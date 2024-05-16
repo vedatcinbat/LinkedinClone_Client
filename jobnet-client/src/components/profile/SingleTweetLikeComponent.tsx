@@ -4,6 +4,7 @@ import {RootState} from "@/redux/store.ts";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {fetchUserDataProfile} from "@/redux/user/userThunks.ts";
+
 //import {fetchUserDataProfile} from "@/redux/user/userThunks.ts";
 
 interface PostInterface {
@@ -57,10 +58,8 @@ const SingleTweetLikeComponent: React.FC<PostInterface> = ({mes, publisherUser, 
         const day = parsedDate.getDate();
         const month = parsedDate.getMonth();
         const year = parsedDate.getFullYear();
-        const formattedDate = `${day}/${month}/${year} ${hour}:${minute}`;
-        return formattedDate;
+        return `${day}/${month}/${year} ${hour}:${minute}`;
     }
-    console.log(post);
     return (
         <div
             onMouseOver={() => setIsHovered(true)}

@@ -12,8 +12,6 @@ const UserHomePage = () => {
         const currentUserData = useSelector((state: RootState) => state.user.currentUser);
         const currentUserAuthData = useSelector((state: RootState) => state.auth);
     */
-    const currentUserData = useSelector((state: RootState) => state.user);
-    console.log(currentUserData)
     const isLoading = useSelector((state: RootState) => state.auth.loading);
 
     return (

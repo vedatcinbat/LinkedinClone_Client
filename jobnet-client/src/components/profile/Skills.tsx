@@ -55,7 +55,6 @@ const Skills: React.FC<SkillProps> = ({skills, mes}) => {
     }
 
     const addCurrentSkill = () => {
-        console.log('Button Clicked with skillId : ', currentSkillId)
         const url = `http://localhost:5087/api/users/addSkill/${currentSkillId}`;
         axios.patch(
             url,

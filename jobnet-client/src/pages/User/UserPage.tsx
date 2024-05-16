@@ -32,6 +32,10 @@ const UserPage = () => {
 
 
     useEffect(() => {
+        console.log(followingsData)
+    }, [])
+
+    useEffect(() => {
         const baseUrl = `http://localhost:5087/api/users/${userId}/profile`;
         const amIFollowingThisUser = `http://localhost:5087/api/Follow/${currentUserId}/isFollowing/${userId}`;
         try {
@@ -40,7 +44,6 @@ const UserPage = () => {
             });
             axios.get(`${amIFollowingThisUser}`).then(res => {
                 setAmIFollow(res.data)
-                console.log(res.data);
             }).catch(err => {
                 console.log(err);
             });
@@ -90,7 +93,7 @@ const UserPage = () => {
                                 </div>
                             ) : (
                                 <div
-                                    className="absolute top-[10%] left-[30%] w-[70vh] h-[85vh] bg-gray7 text-white rounded-lg p-2 flex flex-col justify-start items-center p-2">
+                                    className="absolute top-[10%] left-[30%] w-[70vh] h-[85vh] bg-gray7 text-white rounded-lg flex flex-col justify-start items-center p-2">
                                     <button onClick={closeFollowers}
                                             className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
                                     </button>
@@ -123,15 +126,15 @@ const UserPage = () => {
                                 </div>
                             ) : (
                                 <div
-                                    className="absolute top-[10%] left-[30%] w-[70vh] h-[85vh] bg-gray7 text-white rounded-lg p-2">
+                                    className="absolute top-[10%] left-[30%] w-[70vh] h-[85vh] bg-gray7 text-white rounded-l flex flex-col justify-start items-center p-2">
                                     <button onClick={closeFollowings}
                                             className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
                                     </button>
                                     <div className="header">
                                         <div>Followings</div>
                                     </div>
-                                    <div className="users">
-                                        {followersData?.map((user, key) => (
+                                    <div className="users w-full mt-4">
+                                        {followingsData?.map((user, key) => (
                                             <FollowersUserBox user={user} key={key}/>
                                         ))}
                                     </div>

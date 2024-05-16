@@ -33,7 +33,7 @@ const EditCurrentTitle = ({setEditTitlePopup, setShowMessagePopup, setMessagePop
 
             setTimeout(() => {
                 setShowMessagePopup(false);
-            }, 4000);
+            }, 2000);
         }).catch((err) => {
             console.log(err);
         });

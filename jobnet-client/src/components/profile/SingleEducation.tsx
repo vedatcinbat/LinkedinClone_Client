@@ -15,7 +15,6 @@ const SimpleDate = (date: Date) => {
 }
 
 const SingleEducation = (prop: SingleEducationProps, index: number) => {
-    console.log(prop);
     return (
         <>
             <div key={index}

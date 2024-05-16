@@ -5,6 +5,7 @@ import {ConnectionsPost, User} from '@/types/types.ts';
 
 interface UserState {
     currentUser: User | null;
+
     showFollowers: boolean;
     showFollowings: boolean;
     showJob: boolean;
@@ -30,13 +31,13 @@ export const userSlice = createSlice({
         setCurrentUser(state, action: PayloadAction<User | null>) {
             state.currentUser = action.payload;
         },
-        updateCurrentUserCompany(state, action: PayloadAction<number>) {
+        updateCurrentUserCompanyName(state, action: PayloadAction<string>) {
             if(state.currentUser && state.currentUser.company) {
-                state.currentUser.company.companyId = action.payload;
+                state.currentUser.company.companyName = action.payload;
             }
         },
         updateCurrentUserTitle(state, action: PayloadAction<string>) {
-            if(state.currentUser && state.currentUser.title) {
+            if(state.currentUser) {
                 state.currentUser.title = action.payload;
             }
         },
@@ -64,6 +65,6 @@ export const userSlice = createSlice({
     },
 });
 
-export const {setConnectionsPosts, setShowJob, setCurrentUser, updateCurrentUserCompany, updateCurrentUser, updateCurrentUserTitle, setShowFollowings, setShowFollowers, setFollowersData, setFollowingsData } = userSlice.actions;
+export const {setConnectionsPosts, setShowJob, setCurrentUser, updateCurrentUserCompanyName, updateCurrentUserTitle, setShowFollowings, setShowFollowers, setFollowersData, setFollowingsData } = userSlice.actions;
 
 export default userSlice.reducer;

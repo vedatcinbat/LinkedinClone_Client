@@ -1,6 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { setCurrentUser } from './userSlice';
+import {
+    setCurrentUser,
+    updateCurrentUserCompanyName,
+    updateCurrentUserTitle
+} from './userSlice';
 import { User } from '@/types/types.ts';
 
 const API_BASE_URL = 'http://localhost:5087/api';
@@ -15,6 +19,14 @@ export const fetchUserDataSimple = createAsyncThunk(
             const userData: User = response.data;
 
             dispatch(setCurrentUser(userData));
+
+            if(userData.company) {
+                dispatch(updateCurrentUserCompanyName(userData.company.companyName));
+            }
+
+            if(userData.title) {
+                dispatch(updateCurrentUserTitle(userData.title));
+            }
 
             return userData;
         } catch (error) {

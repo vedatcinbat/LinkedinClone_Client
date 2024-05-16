@@ -43,7 +43,6 @@ const SingleSkill: React.FC<SingleSkillProps> = ({ skill }) => {
             }
         )
             .then((res) => {
-                console.log(res);
                 if(res.status === 200 && !res.data.problemDetails) {
                     setMessages([...messages, 'Skill deleted successfully']);
                     setShowMessage(true);

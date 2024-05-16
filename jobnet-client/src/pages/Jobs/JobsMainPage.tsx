@@ -21,7 +21,6 @@ const JobsMainPage: React.FC = () => {
             console.log(err);
         });
     }, []);
-    console.log(allJobs);
 
     const applyJob = (jobId: string) => {
         const baseUrl = `http://localhost:5087/api/Job/${currentUserId}/applyJob/${jobId}`;

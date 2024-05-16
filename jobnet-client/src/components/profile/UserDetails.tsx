@@ -30,6 +30,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({setAmIFollow, amIFollow, userI
     const token = useSelector((state: RootState) => state.auth.accessToken);
     const dispatch = useDispatch();
 
+
     const handleFollowUnfollow = () => {
         if(amIFollow && setAmIFollow) {
             const baseUrl = `http://localhost:5087/api/Follow/${currentUserId}/unfollow/${userId}`;

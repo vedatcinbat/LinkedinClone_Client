@@ -57,8 +57,7 @@ const PostJob: React.FC = () => {
 
     useEffect(() => {
         const getAllJobsUrl = `http://localhost:5087/api/Job/getAllJobs`;
-        axios.get(getAllJobsUrl).then((res) => {
-            console.log(res.data);
+        axios.get(getAllJobsUrl).then(() => {
         });
     }, []);
 
@@ -87,7 +86,6 @@ const PostJob: React.FC = () => {
             alert("Please fill all fields or companyId cannot be 0");
             return;
         }
-        console.log(createJobApiRequest)
         const postJobUrl = `http://localhost:5087/api/Job/addJob`;
 
         axios
@@ -97,8 +95,7 @@ const PostJob: React.FC = () => {
                     'Content-Type': "application/json",
                 },
             })
-            .then((res) => {
-                console.log(res.data);
+            .then(() => {
                 alert(`Job Added Successfully`);
                 dispatch(setShowJob(false));
             })
@@ -106,7 +103,6 @@ const PostJob: React.FC = () => {
                 alert(`Error: ${err}`);
                 console.log(err);
             });
-        console.log(createJobApiRequest)
     };
 
     const handleStartsDate = (e: React.ChangeEvent<HTMLInputElement>) => {
