@@ -1,8 +1,9 @@
 import React from "react";
 import {UserPostRequest} from "@/types/types.ts";
 import {RootState} from "@/redux/store.ts";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
+import {updateUserProfile} from "@/redux/user/userThunks.ts";
 
 
 interface CreatePostProps {
@@ -25,7 +26,8 @@ const CreatePostRequest: UserPostRequest = {
 const CreatePost: React.FC<CreatePostProps> = ({setShowPostTweet, setShowMessagePopup, setMessagePopupText}) => {
 
     const token = useSelector((state: RootState) => state.auth.accessToken);
-    //const dispatch = useDispatch();
+    const currentUserId = useSelector((state: RootState) => state.auth.userId);
+    const dispatch = useDispatch();
 
     const postTweet = () => {
         const url = `http://localhost:5087/api/Post/createPost`;
@@ -39,6 +41,9 @@ const CreatePost: React.FC<CreatePostProps> = ({setShowPostTweet, setShowMessage
                 }
             }
         ).then(() => {
+            // @ts-ignore
+            dispatch(updateUserProfile(currentUserId));
+
             setShowPostTweet(false);
             setShowMessagePopup(true);
             setMessagePopupText("Post created successfully");

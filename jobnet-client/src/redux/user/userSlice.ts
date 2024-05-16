@@ -5,7 +5,6 @@ import {ConnectionsPost, User} from '@/types/types.ts';
 
 interface UserState {
     currentUser: User | null;
-
     showFollowers: boolean;
     showFollowings: boolean;
     showJob: boolean;
