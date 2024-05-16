@@ -49,21 +49,21 @@ const SingleSkill: React.FC<SingleSkillProps> = ({ skill }) => {
 
                     setTimeout(() => {
                         setShowMessage(false);
-                    }, 3000);
+                    }, 2000);
                 }else if(res.data.problemTitle) {
                     setMessages([...messages, res.data.problemTitle]);
                     setShowMessage(true);
 
                     setTimeout(() => {
                         setShowMessage(false);
-                    }, 3000);
+                    }, 2000);
                 }else {
                     setMessages([...messages, 'Error occurred while deleting skill']);
                     setShowMessage(true);
 
                     setTimeout(() => {
                         setShowMessage(false);
-                    }, 3000);
+                    }, 2000);
                 }
             })
             .catch((error) => {

@@ -76,7 +76,7 @@ const SignupPage: React.FC = () => {
             setShowAlerts(true);
             setTimeout(() => {
                 setShowAlerts(false);
-            }, 3000);
+            }, 2000);
         } catch (error) {
             // @ts-ignore
             if (error.response && error.response.status === 400) {
@@ -84,7 +84,7 @@ const SignupPage: React.FC = () => {
                 setShowAlerts(true);
                 setTimeout(() => {
                     setShowAlerts(false);
-                }, 3000);
+                }, 2000);
                 setSignupRequest(initialSignupRequest);
             } else {
                 console.error('Error creating user:', error);

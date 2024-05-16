@@ -5,7 +5,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
 import {updateCurrentUserTitle} from "@/redux/user/userSlice.ts";
 //@ts-ignore
-const EditCurrentTitle = ({setEditTitlePopup, setShowMessagePopup, setMessagePopupText, setCurrentTitle, currentTitle}) => {
+const EditCurrentTitle = ({setEditTitlePopup, setShowMessagePopup, setMessagePopupText}) => {
+
+    const [currentTitleInput, setCurrentTitleInput] = useState<string>("");
 
     const currentUserId = useSelector((state: RootState) => state.auth.userId);
     const userAuthData = useSelector((state: RootState) => state.auth);
@@ -14,7 +16,7 @@ const EditCurrentTitle = ({setEditTitlePopup, setShowMessagePopup, setMessagePop
     const dispatch = useDispatch();
 
     const UpdateCurrentTitle = () => {
-        const url = `http://localhost:5087/api/users/${currentUserId}/updateTitle/${currentTitle}`;
+        const url = `http://localhost:5087/api/users/${currentUserId}/updateTitle/${currentTitleInput}`;
         axios.patch(
             url,
             null,
@@ -25,10 +27,10 @@ const EditCurrentTitle = ({setEditTitlePopup, setShowMessagePopup, setMessagePop
                 }
             }
         ).then(() => {
-            dispatch(updateCurrentUserTitle(currentTitle));
+            dispatch(updateCurrentUserTitle(currentTitleInput));
 
             setEditTitlePopup(false);
-            setMessagePopupText(`Your title has been updated to : ${currentTitle}`)
+            setMessagePopupText(`Your title has been updated to : ${currentTitleInput}`)
             setShowMessagePopup(true);
 
             setTimeout(() => {
@@ -49,8 +51,8 @@ const EditCurrentTitle = ({setEditTitlePopup, setShowMessagePopup, setMessagePop
                 </div>
                 <div className="companyLists w-full flex flex-col items-center justify-center h-[30vh]">
                     <div className="titleInput flex justify-center items-center gap-4 mt-2">
-                        <input className="p-2 rounded-lg" type="text" placeholder="Title..." onChange={(e) => setCurrentTitle(e.target.value)}/>
-                        <div className="bg-gray8 text-white p-2 text-xs w-[25vh] text-center rounded-xl">Current Title: {currentTitle}</div>
+                        <input className="p-2 rounded-lg" type="text" placeholder="Title..." onChange={(e) => setCurrentTitleInput(e.target.value)}/>
+                        <div className="bg-gray8 text-white p-2 text-xs w-[25vh] text-center rounded-xl">Current Title: {currentTitleInput}</div>
                     </div>
                     <div className="button mt-4">
                         <button

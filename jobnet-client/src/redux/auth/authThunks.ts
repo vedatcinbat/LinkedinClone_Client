@@ -34,7 +34,7 @@ export const loginUser = createAsyncThunk(
                 dispatch(setError("Login Failed"))
                 setTimeout(() => {
                     dispatch(setError(null))
-                }, 3000);
+                }, 2000);
             });
 
     }
