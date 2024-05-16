@@ -28,6 +28,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({setAmIFollow, amIFollow, userI
     const currentUserId = useSelector((state: RootState) => state.auth.userId);
     const isUserLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
     const token = useSelector((state: RootState) => state.auth.accessToken);
+    const currentUserCompany = useSelector((state: RootState) => state.user.currentUserCompany);
     const dispatch = useDispatch();
 
     const handleFollowUnfollow = () => {
@@ -137,7 +138,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({setAmIFollow, amIFollow, userI
                     <div className="text-white">Company</div>
                     <div
                         onClick={() => setEditCompanyPopup ? setEditCompanyPopup(true) : null}
-                        className="text-gray5 cursor-pointer">{currentUserData.company === null ? "No Company" : currentUserData.company?.companyName}</div>
+                        className="text-gray5 cursor-pointer">{currentUserCompany == "" ? 'No Company' : currentUserCompany}</div>
                 </div>
             </div>
             <div className="text-center ml-4 bg-gray7 p-3 rounded-xl">

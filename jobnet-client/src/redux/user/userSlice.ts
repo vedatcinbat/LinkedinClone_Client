@@ -5,6 +5,7 @@ import {ConnectionsPost, User} from '@/types/types.ts';
 
 interface UserState {
     currentUser: User | null;
+    currentUserCompany: string;
     showFollowers: boolean;
     showFollowings: boolean;
     showJob: boolean;
@@ -21,6 +22,7 @@ const initialState: UserState = {
     followingsData: null,
     showJob: false,
     connectionPosts: [],
+    currentUserCompany: ""
 };
 
 export const userSlice = createSlice({
@@ -30,10 +32,8 @@ export const userSlice = createSlice({
         setCurrentUser(state, action: PayloadAction<User | null>) {
             state.currentUser = action.payload;
         },
-        updateCurrentUserCompany(state, action: PayloadAction<number>) {
-            if(state.currentUser && state.currentUser.company) {
-                state.currentUser.company.companyId = action.payload;
-            }
+        updateCurrentUserCompany(state, action: PayloadAction<string>) {
+            state.currentUserCompany = action.payload;
         },
         updateCurrentUserTitle(state, action: PayloadAction<string>) {
             if(state.currentUser && state.currentUser.title) {
@@ -64,6 +64,6 @@ export const userSlice = createSlice({
     },
 });
 
-export const {setConnectionsPosts, setShowJob, setCurrentUser, updateCurrentUserCompany, updateCurrentUser, updateCurrentUserTitle, setShowFollowings, setShowFollowers, setFollowersData, setFollowingsData } = userSlice.actions;
+export const {updateCurrentUserCompany, setConnectionsPosts, setShowJob, setCurrentUser, updateCurrentUser, updateCurrentUserTitle, setShowFollowings, setShowFollowers, setFollowersData, setFollowingsData } = userSlice.actions;
 
 export default userSlice.reducer;

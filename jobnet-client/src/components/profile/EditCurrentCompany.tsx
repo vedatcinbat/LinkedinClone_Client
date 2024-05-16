@@ -12,6 +12,7 @@ const EditCurrentCompany = ({setEditCompanyPopup, setMessagePopupText, setShowMe
     const [companyResponses, setCompanyResponses] = useState<Company[]>();
     const [currentCompany, setCurrentCompany] = useState<string>("");
     const [currentCompanyId, setCurrentCompanyId] = useState<number>(0);
+    const [currentCompanyName, setCurrentCompanyName] = useState<string>("");
     const userAuthData = useSelector((state: RootState) => state.auth);
     const token = userAuthData.accessToken;
     const dispatch = useDispatch();
@@ -39,16 +40,16 @@ const EditCurrentCompany = ({setEditCompanyPopup, setMessagePopupText, setShowMe
             }
         )
             .then(() => {
-                // Dispatch action to update current user company information
-                dispatch(updateCurrentUserCompany(currentCompanyId));
-
                 setEditCompanyPopup(false);
                 setMessagePopupText(`Now you are working at CompanyId : ${currentCompanyId}`)
                 setShowMessagePopup(true);
 
+                dispatch(updateCurrentUserCompany(currentCompanyName));
+                console.log(currentCompany);
+
                 setTimeout(() => {
                     setShowMessagePopup(false);
-                }, 4000);
+                }, 3000);
             })
             .catch((err) => {
                 console.log(err);
@@ -71,7 +72,7 @@ const EditCurrentCompany = ({setEditCompanyPopup, setMessagePopupText, setShowMe
                     <div className="companiesResponse p-2 h-[80vh] overflow-y-scroll scrollbar-hidden flex flex-col justify-between">
                         {companyResponses !== null ? (
                             companyResponses?.map(company => (
-                                <UpdateCompanyBox key={company.companyId} company={company} setCurrentCompanyId={setCurrentCompanyId}/>
+                                <UpdateCompanyBox key={company.companyId} company={company} setCurrentCompanyId={setCurrentCompanyId} setCurrentCompanyName={setCurrentCompanyName} />
                             ))
                         ) : (
                             <div className="text-xl">...</div>
