@@ -1,26 +1,30 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // @ts-ignore
 import { RootState } from '../store';
-import {ConnectionsPost, User} from '@/types/types.ts';
+import {ConnectionsPost, LikeSimpleResponse, User} from '@/types/types.ts';
 
 interface UserState {
     currentUser: User | null;
     showFollowers: boolean;
     showFollowings: boolean;
     showJob: boolean;
+    showLikes: boolean;
     followersData: User[] | null;
     followingsData: User[] | null;
     connectionPosts: ConnectionsPost[] | [];
+    postLikes: LikeSimpleResponse[] | [];
 }
 
 const initialState: UserState = {
     currentUser: null,
     showFollowers: false,
     showFollowings: false,
+    showLikes: false,
     followersData: null,
     followingsData: null,
     showJob: false,
     connectionPosts: [],
+    postLikes: []
 };
 
 export const userSlice = createSlice({
@@ -30,10 +34,16 @@ export const userSlice = createSlice({
         setCurrentUser(state, action: PayloadAction<User | null>) {
             state.currentUser = action.payload;
         },
+        setPostLikes(state, action: PayloadAction<LikeSimpleResponse[]>) {
+            state.postLikes = action.payload;
+        },
         updateCurrentUserCompanyName(state, action: PayloadAction<string>) {
             if(state.currentUser && state.currentUser.company) {
                 state.currentUser.company.companyName = action.payload;
             }
+        },
+        setShowLikes(state, action: PayloadAction<boolean>) {
+            state.showLikes = action.payload;
         },
         updateCurrentUserTitle(state, action: PayloadAction<string>) {
             if(state.currentUser && action.payload != null) {
@@ -64,6 +74,6 @@ export const userSlice = createSlice({
     },
 });
 
-export const {setConnectionsPosts, setShowJob, setCurrentUser, updateCurrentUserCompanyName, updateCurrentUserTitle, setShowFollowings, setShowFollowers, setFollowersData, setFollowingsData } = userSlice.actions;
+export const {setPostLikes, setShowLikes, setConnectionsPosts, setShowJob, setCurrentUser, updateCurrentUserCompanyName, updateCurrentUserTitle, setShowFollowings, setShowFollowers, setFollowersData, setFollowingsData } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -58,9 +58,15 @@ export const fetchUserDataProfile = createAsyncThunk<User, string>(
 
 export const updateUserConnectionsPosts = createAsyncThunk(
     'user/updateUserConnectionsPosts',
+    // @ts-ignore
     async (userId: number, { dispatch, rejectWithValue }) => {
         try {
-            const response = await axios.get<ConnectionsPost[]>(`${API_BASE_URL}/users/${userId}/connections/getConnectionPosts`);
+            const response = await axios.get<ConnectionsPost[]>(`${API_BASE_URL}/users/getConnectionPosts`, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
+                    "Content-Type": "application/json"
+                }
+            });
             const connectionsPosts: ConnectionsPost[] = response.data;
 
             dispatch(setConnectionsPosts(connectionsPosts));

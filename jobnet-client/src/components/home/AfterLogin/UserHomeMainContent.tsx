@@ -33,17 +33,20 @@ const UserHomeMainContent = () => {
         <>
             {connectionsPosts.length > 0 ? (
                 <>
-                    {connectionsPosts.map((post) => (
-                        <div className="text-white flex flex-col items-center gap-2">
-                            <UserConnectionPost key={post.postId} post={post} />
-                        </div>
-                    ))}
+                    <>
+                        {connectionsPosts.map((post) => (
+                            <div className="text-white flex flex-col items-center gap-2">
+                                <UserConnectionPost key={post.postId} post={post}/>
+                            </div>
+                        ))}
+                    </>
                 </>
             ) : (
                 <div className="flex justify-center items-center">
-                    <div className="w-[90%] p-4 h-[20vh] bg-gray7 text-white flex justify-center items-center mt-2 rounded-xl">
+                    <div
+                        className="w-[90%] p-4 h-[20vh] bg-gray7 text-white flex justify-center items-center mt-2 rounded-xl">
                         <div className="content flex justify-center items-center flex-col ">
-                            <div className="noPost text-2xl font-bold">No Post From Connections</div>
+                        <div className="noPost text-2xl font-bold">No Post From Connections</div>
                             <div className="seeOtherUsers bg-gray8 w-[20vh] h-[5vh] rounded-xl flex justify-center items-center">
                                 <Link to='/connections' className="text-gray3">See Other Users</Link>
                             </div>
