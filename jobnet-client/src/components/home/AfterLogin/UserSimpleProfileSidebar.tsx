@@ -10,8 +10,10 @@ const UserSimpleProfileSidebar = () => {
 
     const currentUserData: User | null = useSelector((state: RootState) => state.user.currentUser);
 
+    const showLikes = useSelector((state: RootState) => state.user.showLikes);
+
     return (
-        <div className="w-[40vh] h-[65vh] bg-mainBgColor mt-2 ml-2 rounded-xl flex flex-col justify-evenly items-center p-2 border border-sidebarBorderColor">
+        <div className={`w-[40vh] h-[65vh] bg-mainBgColor mt-2 ml-2 rounded-xl flex flex-col justify-evenly items-center p-2 border border-sidebarBorderColor ${showLikes ? 'opacity-20' : 'opacity-100'}`}>
             <div className="profilePictureContainer bg-sidebarBgColor w-full h-[30%] rounded-2xl mb-2 flex justify-center items-center border border-b-alertSuccessTextColor">
                 {currentUserData?.profilePictureUrl !== null ? (
                     <>

@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
 import axios from "axios";
 import {updateUserConnectionsPosts} from "@/redux/user/userThunks.ts";
+import {setPostLikes, setShowLikes} from "@/redux/user/userSlice.ts";
 interface UserConnectionPostProps {
     post: ConnectionsPost;
     key: number;
@@ -49,7 +50,7 @@ const UserConnectionPost: React.FC<UserConnectionPostProps> = ({post, key}) => {
             ).then(() => {
                 setDoILike(true);
                 // @ts-ignore
-                dispatch(updateUserConnectionsPosts(currentUserId));
+                dispatch(updateUserConnectionsPosts());
                 alert(`Post ${postId} liked successfully`)
             })
         }
@@ -71,6 +72,23 @@ const UserConnectionPost: React.FC<UserConnectionPostProps> = ({post, key}) => {
                 alert(`Post ${postId} disliked successfully`)
             })
         }
+    }
+
+    const showLikesEvent = () => {
+        dispatch(setShowLikes(true));
+        const baseUrl = `http://localhost:5087/api/Post/${postId}/likes`;
+
+        axios.get(baseUrl).then(res => {
+            dispatch(setPostLikes(res.data));
+        }).catch(err => {
+            console.log(err);
+        })
+
+        // @ts-ignore
+        dispatch(updateUserConnectionsPosts(currentUserId));
+
+        console.log(post);
+        //dispatch(setPostLikes(post.likes));
     }
 
     return(
@@ -102,8 +120,10 @@ const UserConnectionPost: React.FC<UserConnectionPostProps> = ({post, key}) => {
                     </div>
                 </div>
                 <div className="showLikesOrComment flex itesm-center gap-2">
-                    <div className="hover:text-black cursor-pointer">Likes</div>
-                    <div className="hover:text-black cursor-pointer">Comments</div>
+                    <div className="hover:text-black cursor-pointer">
+                        <button onClick={showLikesEvent}>Likes {post.likeCount}</button>
+                    </div>
+                    <div className="hover:text-black cursor-pointer">Comments {post.commentCount}</div>
                 </div>
             </div>
         </div>
