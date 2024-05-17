@@ -103,6 +103,23 @@ export interface User {
     showFollowings: true | false | null;
 }
 
+export interface LikeSimpleResponse {
+    likeId: number;
+    isDeleted: boolean;
+    userId: number;
+    user: UserPostSimpleResponse
+}
+
+export interface UserPostSimpleResponse {
+    userId: number;
+    firstname: string;
+    lastname: string;
+    title: string;
+    profilePictureUrl: string;
+    isDeleted: boolean;
+    companyId: number | null;
+    company: UserPostCompanySimpleResponse | null;
+}
 export interface UserSimpleType {
     userId: number;
     firstname: string;
