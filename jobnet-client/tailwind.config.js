@@ -46,6 +46,7 @@ module.exports = {
       "alertErrorTextColor": "#f1f1f1",
       "sidebarBgColor": "#121212",
       "sidebarBorderColor": "#5b5b5b",
+      "postLikeColor": "#ff5858",
       "gray1": "#f8f9fa",
         "gray2": "#e9ecef",
         "gray3": "#dee2e6",
