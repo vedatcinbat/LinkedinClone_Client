@@ -23,7 +23,6 @@ const MyProfilePage: React.FC = () => {
     const [showMessagePopup, setShowMessagePopup] = useState(false);
     const [messagePopupText, setMessagePopupText] = useState<string>('');
     const [editTitlePopup, setEditTitlePopup] = useState(false);
-    const [currentTitle, setCurrentTitle] = useState<string>('');
     const [showPostTweet, setShowPostTweet] = useState(false);
 
 
@@ -78,7 +77,7 @@ const MyProfilePage: React.FC = () => {
                     )}
                     {editTitlePopup && (
                         <div className={`w-[80vh] h-[40vh] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-commentBg ${showMessagePopup ? 'opacity-35' : 'opacity-100'}`}>
-                            <EditCurrentTitle currentTitle={currentTitle} setShowMessagePopup={setShowMessagePopup} setMessagePopupText={setMessagePopupText} setEditTitlePopup={setEditTitlePopup} setCurrentTitle={setCurrentTitle}  />
+                            <EditCurrentTitle setShowMessagePopup={setShowMessagePopup} setMessagePopupText={setMessagePopupText} setEditTitlePopup={setEditTitlePopup}  />
                         </div>
                     )}
                     {showMessagePopup && (
@@ -109,7 +108,7 @@ const MyProfilePage: React.FC = () => {
                                 </div>
                             ) : (
                                 <div
-                                    className="absolute top-[10%] left-[30%] w-[70vh] h-[85vh] bg-gray7 text-white rounded-lg p-2 flex flex-col justify-start items-center p-2">
+                                    className="absolute top-[10%] left-[30%] w-[70vh] h-[85vh] bg-gray7 text-white rounded-lg p-2 flex flex-col justify-start items-center">
                                     <button onClick={closeFollowers}
                                             className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
                                     </button>

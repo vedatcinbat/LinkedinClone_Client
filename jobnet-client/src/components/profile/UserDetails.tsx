@@ -28,8 +28,6 @@ const UserDetails: React.FC<UserDetailsProps> = ({setAmIFollow, amIFollow, userI
     const currentUserId = useSelector((state: RootState) => state.auth.userId);
     const isUserLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
     const token = useSelector((state: RootState) => state.auth.accessToken);
-    const currentUserCompany = useSelector((state: RootState) => state.user.currentUserCompany);
-    const currentUserTitle = useSelector((state: RootState) => state.user.currentUserTitle);
     const dispatch = useDispatch();
 
 
@@ -140,7 +138,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({setAmIFollow, amIFollow, userI
                     <div className="text-white">Company</div>
                     <div
                         onClick={() => setEditCompanyPopup ? setEditCompanyPopup(true) : null}
-                        className="text-gray5 cursor-pointer">{currentUserCompany === "" ? 'No Company' : currentUserCompany}</div>
+                        className="text-gray5 cursor-pointer">{currentUserData.company === null ? "No Company" : currentUserData.company?.companyName}</div>
                 </div>
             </div>
             <div className="text-center ml-4 bg-gray7 p-3 rounded-xl">
@@ -148,7 +146,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({setAmIFollow, amIFollow, userI
                     <div className="text-white">Title</div>
                     <div
                         onClick={() => setEditTitlePopup && setEditTitlePopup(true)}
-                        className="text-gray5 cursor-pointer">{currentUserTitle === "" ? "No Title" : currentUserTitle}</div>
+                        className="text-gray5 cursor-pointer">{currentUserData.title ? currentUserData.title : "No Title"}</div>
                 </div>
             </div>
             {mes === 'another-user' && (

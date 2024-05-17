@@ -36,7 +36,7 @@ export const userSlice = createSlice({
             }
         },
         updateCurrentUserTitle(state, action: PayloadAction<string>) {
-            if(state.currentUser) {
+            if(state.currentUser && action.payload != null) {
                 state.currentUser.title = action.payload;
             }
         },

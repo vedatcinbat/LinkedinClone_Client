@@ -1,18 +1,31 @@
 //@ts-ignore
-import React from "react";
-import {useSelector} from "react-redux";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
 import UserSimpleProfileSidebar from "@/components/home/AfterLogin/UserSimpleProfileSidebar.tsx";
 import UserHomeMainContent from "@/components/home/AfterLogin/UserHomeMainContent.tsx";
 import {Alert, AlertDescription, AlertTitle} from "../../../components/ui/alert.tsx";
 import {RocketIcon} from "@radix-ui/react-icons";
+import {updateCurrentUserTitle} from "@/redux/user/userSlice.ts";
 
 const UserHomePage = () => {
     /*
         const currentUserData = useSelector((state: RootState) => state.user.currentUser);
         const currentUserAuthData = useSelector((state: RootState) => state.auth);
     */
+    const dispatch = useDispatch();
     const isLoading = useSelector((state: RootState) => state.auth.loading);
+    const currentUserData = useSelector((state: RootState) => state.user.currentUser);
+
+
+    useEffect(() => {
+        const currentUserTitle = currentUserData ? currentUserData.title : "No Title";
+        const currentUserCompany = currentUserData && currentUserData.company ? currentUserData.company.companyName : "No Company";
+
+        // @ts-ignore
+        dispatch(updateCurrentUserTitle(currentUserTitle))
+        dispatch(updateCurrentUserTitle(currentUserCompany));
+    }, [])
 
     return (
         <div className="w-full min-h-screen flex flex-row">
