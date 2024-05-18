@@ -73,7 +73,7 @@ const EditCurrentCompany = ({setEditCompanyPopup, setMessagePopupText, setShowMe
                     <div className="companiesResponse p-2 h-[80vh] overflow-y-scroll scrollbar-hidden flex flex-col justify-between">
                         {companyResponses !== null ? (
                             companyResponses?.map(company => (
-                                <UpdateCompanyBox key={company.companyId} company={company} setCurrentCompanyId={setCurrentCompanyId}/>
+                                <UpdateCompanyBox key={company.companyId} company={company} setCurrentCompanyId={setCurrentCompanyId} />
                             ))
                         ) : (
                             <div className="text-xl">...</div>

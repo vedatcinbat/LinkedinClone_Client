@@ -33,6 +33,9 @@ const CompanyPage: React.FC = () => {
             return `http://localhost:5173/my-profile`;
         }
     }
+    const showDescription = (text: string) => {
+        return text.length > 100 ? text.slice(0, 100) + "..." : text;
+    }
 
 
     // @ts-ignore
@@ -46,14 +49,14 @@ const CompanyPage: React.FC = () => {
                 <div className="w-full h-[90vh] bg-mainBgColor p-1">
                     <div className="CompanyDetails bg-gray8 w-full h-[30vh] flex justify-center items-center rounded-xl">
                         <div className="content flex justify-center items-center bg-mainBgColor w-[80vh] h-[20vh] rounded-xl">
-                            <div className="upperPart">
+                            <div className="upperPart p-4">
                                 <div
                                     className="text-formBtnHoverTextColor text-3xl mr-[10vh]">{companyData?.companyName}</div>
                             </div>
                             <div className="buttomPart">
                                 <div
-                                    className="text-formBtnHoverTextColor text-lg mr-[10vh]"><span
-                                    className="text-gray5 text-xs">Description: </span>{companyData?.description}
+                                    className="text-formBtnHoverTextColor text-xs mr-[10vh]"><span
+                                    className="text-gray5 text-md">Description: </span>{showDescription(companyData?.description ? companyData?.description : "No Description")}
                                 </div>
                                 <div
                                     className="text-formBtnHoverTextColor text-md mr-[10vh]"><span
@@ -98,7 +101,7 @@ const CompanyPage: React.FC = () => {
                                         <div className="text-xl">{job.jobTitle}</div>
                                         <div className="text-md text-gray9">{job.jobEmployeeLevel}</div>
                                         <div className="text-md text-gray9">{job.location}</div>
-                                        <div className="text-md text-gray9">{job.description.substring(0, 20)}</div>
+                                        <div className="text-md text-gray9">{job.description.toString().slice(0,100)}</div>
                                         <div className="text-md text-gray9">{job.publisherId}</div>
                                         <div className="text-md text-gray9">{job.deadline.toString()}</div>
                                         <div className="text-xs text-gray7">- {companyData.companyName} -</div>

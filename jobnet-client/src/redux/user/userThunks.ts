@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import {
     setConnectionsPosts,
-    setCurrentUser,
+    setCurrentUser, setFocusedPost,
     updateCurrentUserCompanyName,
     updateCurrentUserTitle
 } from './userSlice';
@@ -79,6 +79,33 @@ export const updateUserConnectionsPosts = createAsyncThunk(
         }
     }
 )
+
+export const updateFocusedPost = createAsyncThunk(
+    'user/updateFocusedPost',
+    // @ts-ignore
+    async (postId: string, { dispatch, rejectWithValue }) => {
+        try {
+            const token = localStorage.getItem('accessToken');
+            const response = await axios.get(`http://localhost:5087/api/Post/${postId}`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            });
+
+            const updatedCurrentPost = response.data;
+
+            dispatch(setFocusedPost(updatedCurrentPost));
+
+            return updatedCurrentPost;
+        } catch (error) {
+            console.error('Update Focused Post error:', error);
+            //@ts-ignore
+            return rejectWithValue(error.response.data.message);
+        }
+    }
+)
+
 
 export const updateUserProfile = createAsyncThunk<User, number>(
     'user/updateUserProfile',

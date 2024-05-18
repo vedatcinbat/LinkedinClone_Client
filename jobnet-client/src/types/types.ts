@@ -110,6 +110,40 @@ export interface LikeSimpleResponse {
     user: UserPostSimpleResponse
 }
 
+export interface FocusedPost {
+    postId: number;
+    isDeleted: boolean;
+    userId: number;
+    user: UserPostSimpleResponse;
+    publishTime: Date;
+    caption: string;
+    postType: PostType;
+    textContent: string | null;
+    imageContent: string | null;
+    imagesContent: string | null;
+    commentCount: number;
+    likeCount: number;
+    comments: PostCommentSimpleApiResponse[] | null;
+    likes: LikeSimpleResponse[] | null;
+}
+
+export interface PostCommentSimpleApiResponse {
+    commentId: number;
+    content: string;
+    commentedAt: Date;
+    userCommentSimpleResponse: UserCommentSimpleResponse;
+}
+
+export interface UserCommentSimpleResponse {
+    userId: number;
+    firstname: string;
+    lastname: string;
+    title: string;
+    profilePictureUrl: string;
+    isDeleted: boolean;
+}
+
+
 export interface UserPostSimpleResponse {
     userId: number;
     firstname: string;
