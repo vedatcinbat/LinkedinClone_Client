@@ -1,6 +1,6 @@
 import React from "react";
 
-const PostSomething = () => {
+const PostSomething: React.FC = () => {
     return(
         <>
             <div>

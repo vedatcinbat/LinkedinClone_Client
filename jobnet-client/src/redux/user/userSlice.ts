@@ -1,12 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // @ts-ignore
 import { RootState } from '../store';
-import {ConnectionsPost, LikeSimpleResponse, User} from '@/types/types.ts';
+import {ConnectionsPost, FocusedPost, LikeSimpleResponse, User} from '@/types/types.ts';
 
 interface UserState {
     currentUser: User | null;
     showFollowers: boolean;
     showFollowings: boolean;
+    isPostFocused: boolean;
+    focusedPost: FocusedPost | null;
+    showAddComment: boolean;
     showJob: boolean;
     showLikes: boolean;
     followersData: User[] | null;
@@ -20,11 +23,14 @@ const initialState: UserState = {
     showFollowers: false,
     showFollowings: false,
     showLikes: false,
+    showAddComment: false,
     followersData: null,
     followingsData: null,
     showJob: false,
     connectionPosts: [],
-    postLikes: []
+    postLikes: [],
+    isPostFocused: false,
+    focusedPost: null
 };
 
 export const userSlice = createSlice({
@@ -36,6 +42,15 @@ export const userSlice = createSlice({
         },
         setPostLikes(state, action: PayloadAction<LikeSimpleResponse[]>) {
             state.postLikes = action.payload;
+        },
+        setShowAddComment(state, action: PayloadAction<boolean>) {
+            state.showAddComment = action.payload;
+        },
+        setIsPostFocused(state, action: PayloadAction<boolean>) {
+            state.isPostFocused = action.payload;
+        },
+        setFocusedPost(state, action: PayloadAction<FocusedPost | null>) {
+            state.focusedPost = action.payload;
         },
         updateCurrentUserCompanyName(state, action: PayloadAction<string>) {
             if(state.currentUser && state.currentUser.company) {
@@ -74,6 +89,6 @@ export const userSlice = createSlice({
     },
 });
 
-export const {setPostLikes, setShowLikes, setConnectionsPosts, setShowJob, setCurrentUser, updateCurrentUserCompanyName, updateCurrentUserTitle, setShowFollowings, setShowFollowers, setFollowersData, setFollowingsData } = userSlice.actions;
+export const {setFocusedPost, setIsPostFocused, setShowAddComment, setPostLikes, setShowLikes, setConnectionsPosts, setShowJob, setCurrentUser, updateCurrentUserCompanyName, updateCurrentUserTitle, setShowFollowings, setShowFollowers, setFollowersData, setFollowingsData } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -6,8 +6,13 @@ import UserSimpleProfileSidebar from "@/components/home/AfterLogin/UserSimplePro
 import UserHomeMainContent from "@/components/home/AfterLogin/UserHomeMainContent.tsx";
 import {Alert, AlertDescription, AlertTitle} from "../../../components/ui/alert.tsx";
 import {RocketIcon} from "@radix-ui/react-icons";
-import {setShowLikes, updateCurrentUserTitle} from "@/redux/user/userSlice.ts";
+import {
+    setShowLikes,
+    updateCurrentUserCompanyName,
+    updateCurrentUserTitle
+} from "@/redux/user/userSlice.ts";
 import LikeUserBox from "@/components/home/AfterLogin/LikeUserBox.tsx";
+import FocusedPostComponent from "@/components/home/AfterLogin/FocusedPostComponent.tsx";
 
 const UserHomePage = () => {
     /*
@@ -19,16 +24,16 @@ const UserHomePage = () => {
     const currentUserData = useSelector((state: RootState) => state.user.currentUser);
     const showLikes = useSelector((state: RootState) => state.user.showLikes);
     const postLikes = useSelector((state: RootState) => state.user.postLikes);
-
+    const isPostFocused = useSelector((state: RootState) => state.user.isPostFocused);
+    const currentFocusedPost = useSelector((state: RootState) => state.user.focusedPost);
 
     useEffect(() => {
         const currentUserTitle = currentUserData ? currentUserData.title : "No Title";
-        const currentUserCompany = currentUserData && currentUserData.company ? currentUserData.company.companyName : "No Company";
+        const currentUserCompany = currentUserData?.company ? currentUserData.company.companyName : "No Company";
 
         // @ts-ignore
         dispatch(updateCurrentUserTitle(currentUserTitle))
-        dispatch(updateCurrentUserTitle(currentUserCompany));
-        console.log(postLikes)
+        dispatch(updateCurrentUserCompanyName(currentUserCompany));
     }, [])
 
     const closeLikes = () => {
@@ -48,10 +53,10 @@ const UserHomePage = () => {
                     </div>
                 </>) : (
                 <>
-                    <div className={`userSimpleDataSidebar min-h-screen w-[60vh]`}>
+                    <div className={`userSimpleDataSidebar min-h-screen w-[60vh] ${showLikes || isPostFocused ? 'opacity-15' : ''}`}>
                         <UserSimpleProfileSidebar/>
                     </div>
-                    <div className={`userMainContent w-full bg-mainBgColor ${showLikes ? 'opacity-20' : 'opacity-100'}`}>
+                    <div className={`userMainContent w-full bg-mainBgColor ${showLikes || isPostFocused ? 'opacity-20' : 'opacity-100'}`}>
                         <UserHomeMainContent/>
                     </div>
                     {showLikes && (
@@ -72,6 +77,9 @@ const UserHomePage = () => {
                                 </div>
                             </div>
                         </div>
+                    )}
+                    {(isPostFocused && currentFocusedPost) && (
+                        <FocusedPostComponent />
                     )}
                 </>
             )}

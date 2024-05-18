@@ -6,7 +6,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
 import axios from "axios";
 import {updateUserConnectionsPosts} from "@/redux/user/userThunks.ts";
-import {setPostLikes, setShowLikes} from "@/redux/user/userSlice.ts";
+import {
+    setFocusedPost,
+    setIsPostFocused,
+    setPostLikes,
+    setShowAddComment,
+    setShowLikes
+} from "@/redux/user/userSlice.ts";
 interface UserConnectionPostProps {
     post: ConnectionsPost;
     key: number;
@@ -68,7 +74,7 @@ const UserConnectionPost: React.FC<UserConnectionPostProps> = ({post, key}) => {
             ).then(() => {
                 setDoILike(false);
                 // @ts-ignore
-                dispatch(updateUserConnectionsPosts(currentUserId));
+                dispatch(updateUserConnectionsPosts());
                 alert(`Post ${postId} disliked successfully`)
             })
         }
@@ -91,9 +97,28 @@ const UserConnectionPost: React.FC<UserConnectionPostProps> = ({post, key}) => {
         //dispatch(setPostLikes(post.likes));
     }
 
-    return(
-        <div key={key} className="w-[60vh] h-[30vh] flex flex-col items-center bg-gray7 text-white mt-2 mb-4 rounded-xl cursor-pointer">
-            <div className="userDetails w-full h-[20%] bg-black2 rounded-tl-xl rounded-tr-xl text-white flex justify-between items-center p-2">
+    const showCommentInputBox = () => {
+        // @ts-ignore
+        dispatch(setShowAddComment(true))
+    }
+
+    const focusPost = () => {
+        dispatch(setIsPostFocused(true));
+
+        const baseUrl = `http://localhost:5087/api/Post/${postId}`;
+
+        axios.get(baseUrl).then(res => {
+            dispatch(setFocusedPost(res.data));
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    return (
+        <div key={key}
+             className="w-[60vh] h-[30vh] flex flex-col items-center bg-gray7 text-white mt-2 mb-4 rounded-xl cursor-pointer">
+            <div
+                className="userDetails w-full h-[20%] bg-black2 rounded-tl-xl rounded-tr-xl text-white flex justify-between items-center p-2">
                 <div className="fullNameCompany flex items-center gap-2">
                     <div className="text-lg text-gray4">{post.user?.firstname} {post.user?.lastname}</div>
                     {post.user?.company && (
@@ -105,18 +130,22 @@ const UserConnectionPost: React.FC<UserConnectionPostProps> = ({post, key}) => {
                     <div className="text-xs">({post.publishTime.toString()})</div>
                 </div>
             </div>
-            <div className="content w-full h-[70%] bg-commentBg flex justify-center items-center">
-                <div>{post.textContent}</div>
-            </div>
+            <button onClick={focusPost} className="content w-full h-[70%] bg-commentBg flex justify-center items-center rounded-bl-xl rounded-br-xl">
+                <div>
+                    <div>{post.textContent}</div>
+                </div>
+            </button>
             <div className="likesComments w-full flex gap-2 justify-between items-center p-2">
                 <div className="likeOrCommentButton flex items-center gap-2">
                     <div className={`cursor-pointer ${doILike ? 'text-postLikeColor' : 'text-white'}`}>
                         <button onClick={likeDislikePost}>
-                            <FavoriteIcon className="hover:scale-125" />
+                            <FavoriteIcon className="hover:scale-125"/>
                         </button>
                     </div>
-                    <div className="hover:text-black cursor-pointer">
-                        <ChatBubbleOutlineIcon />
+                    <div
+                        onClick={showCommentInputBox}
+                        className="hover:text-black cursor-pointer">
+                        <ChatBubbleOutlineIcon/>
                     </div>
                 </div>
                 <div className="showLikesOrComment flex itesm-center gap-2">
