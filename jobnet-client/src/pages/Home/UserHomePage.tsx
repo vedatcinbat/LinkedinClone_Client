@@ -7,18 +7,22 @@ import UserHomeMainContent from "@/components/home/AfterLogin/UserHomeMainConten
 import {Alert, AlertDescription, AlertTitle} from "../../../components/ui/alert.tsx";
 import {RocketIcon} from "@radix-ui/react-icons";
 import {
+    setConnectionsPosts,
     setShowLikes,
     updateCurrentUserCompanyName,
     updateCurrentUserTitle
 } from "@/redux/user/userSlice.ts";
 import LikeUserBox from "@/components/home/AfterLogin/LikeUserBox.tsx";
 import FocusedPostComponent from "@/components/home/AfterLogin/FocusedPostComponent.tsx";
+import axios, {AxiosResponse} from "axios";
+import {ConnectionsPost} from "@/types/types.ts";
 
 const UserHomePage = () => {
     /*
         const currentUserData = useSelector((state: RootState) => state.user.currentUser);
         const currentUserAuthData = useSelector((state: RootState) => state.auth);
     */
+    const token = useSelector((state: RootState) => state.auth.accessToken);
     const dispatch = useDispatch();
     const isLoading = useSelector((state: RootState) => state.auth.loading);
     const currentUserData = useSelector((state: RootState) => state.user.currentUser);
@@ -34,6 +38,18 @@ const UserHomePage = () => {
         // @ts-ignore
         dispatch(updateCurrentUserTitle(currentUserTitle))
         dispatch(updateCurrentUserCompanyName(currentUserCompany));
+
+        const baseUrl = `http://localhost:5087/api/users/getConnectionPosts`;
+        axios.get(baseUrl, {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        }).then((res: AxiosResponse<ConnectionsPost[]>) => {
+            dispatch(setConnectionsPosts(res.data));
+        }).catch(err => {
+            console.log(`Error : ${err}`)
+        })
     }, [])
 
     const closeLikes = () => {
