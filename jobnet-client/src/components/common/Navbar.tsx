@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
                 >
                     <div className="logo">
                         <div className="font-bold smallPhone:text-md phone:text-lg tablet:text-xl laptop:text-2xl desktop:text-3xl">
-                            <Link to="/">JobSphere</Link>
+                            <Link to="/">JobNet</Link>
                         </div>
                     </div>
                     <div className="nav-links flex p-2 mr-2">
@@ -75,7 +75,7 @@ const Navbar: React.FC = () => {
                 <div className="logo">
                     <div
                         className="font-bold smallPhone:text-md phone:text-lg tablet:text-xl laptop:text-2xl desktop:text-3xl">
-                        <Link to="/">JobSphere</Link>
+                        <Link to="/">JobNet</Link>
                     </div>
                 </div>
                 <div className="nav-links flex mr-2 mt-2 items-center">
