@@ -1,11 +1,4 @@
 // Request Types
-//@ts-ignore
-/*
-* interface UserLoginRequest {
-    email: string;
-    password: string;
-}
-* */
 export interface UserSignupRequest {
     firstname: string;
     lastname: string;
@@ -57,11 +50,6 @@ export interface UserPostRequest {
     imagesContent:  null;
 }
 
-// Response Types
-
-
-
-
 // Types
 export interface AuthState {
     userId: number | null;
@@ -103,6 +91,7 @@ export interface User {
     showFollowings: true | false | null;
 }
 
+// Response Types
 export interface LikeSimpleResponse {
     likeId: number;
     isDeleted: boolean;

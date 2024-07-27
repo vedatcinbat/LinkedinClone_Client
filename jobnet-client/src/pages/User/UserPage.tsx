@@ -1,16 +1,16 @@
 //@ts-ignore
-import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {User} from "@/types/types.ts";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { User } from "@/types/types.ts";
 import axios from "axios";
 import UserDetails from "@/components/profile/UserDetails.tsx";
 import UserPosts from "@/components/profile/UserPosts.tsx";
 import UserExperiences from "@/components/profile/UserExperiences.tsx";
 import UserEducations from "@/components/profile/UserEducations.tsx";
 import Skills from "@/components/profile/Skills.tsx";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@/redux/store.ts";
-import {setFollowersData, setFollowingsData, setShowFollowers, setShowFollowings} from "@/redux/user/userSlice.ts";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store.ts";
+import { setFollowersData, setFollowingsData, setShowFollowers, setShowFollowings } from "@/redux/user/userSlice.ts";
 import FollowersUserBox from "@/components/Connections/FollowersUserBox.tsx";
 
 interface UserParams {
@@ -64,17 +64,17 @@ const UserPage = () => {
         dispatch(setFollowingsData([]));
     }
 
-    return(
+    return (
         <>
             {userData !== null ? (
                 <div className={`${(showFollowers || showFollowings) && 'h-[92vh] overflow-hidden'}`}>
                     <div
                         className={`mainCode userDataContainer w-full flex flex-col justify-between gap-2 p-1 ${showFollowers || showFollowings ? 'opacity-15' : 'opacity-100'}`}>
-                        <UserDetails setAmIFollow={setAmIFollow} amIFollow={amIFollow} userId={userId} currentUserData={userData} mes={(currentUserId?.toString() !== userId) ? 'another-user' : 'same-user'}  />
+                        <UserDetails setAmIFollow={setAmIFollow} amIFollow={amIFollow} userId={userId} currentUserData={userData} mes={(currentUserId?.toString() !== userId) ? 'another-user' : 'same-user'} />
                         <UserPosts publisherUser={`${userData.firstname} ${userData.lastname}`} postData={userData.posts} mes={(currentUserId?.toString() !== userId) ? 'another-user' : 'same-user'} />
                         <UserExperiences experiencesData={userData.experiences} />
                         <UserEducations educationsData={userData.educations} />
-                        <Skills skills={userData.skills} mes={(currentUserId?.toString() !== userId) ? 'another-user' : 'same-user'}  />
+                        <Skills skills={userData.skills} mes={(currentUserId?.toString() !== userId) ? 'another-user' : 'same-user'} />
                     </div>
                     {showFollowers && (
                         <>
@@ -82,7 +82,7 @@ const UserPage = () => {
                                 <div
                                     className="absolute top-[10%] left-[30%] w-[70vh] h-[85vh] bg-gray7 text-white rounded-lg p-2">
                                     <button onClick={closeFollowers}
-                                            className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
+                                        className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
                                     </button>
                                     <div className="header text-center">
                                         <div>Followers</div>
@@ -95,14 +95,14 @@ const UserPage = () => {
                                 <div
                                     className="absolute top-[10%] left-[30%] w-[70vh] h-[85vh] bg-gray7 text-white rounded-lg flex flex-col justify-start items-center p-2">
                                     <button onClick={closeFollowers}
-                                            className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
+                                        className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
                                     </button>
                                     <div className="header">
                                         <div>Followers</div>
                                     </div>
                                     <div className="users w-full mt-4">
                                         {followersData?.map((user, key) => (
-                                            <FollowersUserBox user={user} key={key}/>
+                                            <FollowersUserBox user={user} key={key} />
                                         ))}
                                     </div>
                                 </div>
@@ -115,7 +115,7 @@ const UserPage = () => {
                                 <div
                                     className="absolute top-[10%] left-[30%] w-[70vh] h-[85vh] bg-gray7 text-white rounded-lg p-2">
                                     <button onClick={closeFollowings}
-                                            className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
+                                        className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
                                     </button>
                                     <div className="header">
                                         <div>Followings</div>
@@ -128,14 +128,14 @@ const UserPage = () => {
                                 <div
                                     className="absolute top-[10%] left-[30%] w-[70vh] h-[85vh] bg-gray7 text-white rounded-l flex flex-col justify-start items-center p-2">
                                     <button onClick={closeFollowings}
-                                            className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
+                                        className="absolute top-1 right-1 p-2 rounded-xl bg-mainBgColor">Close
                                     </button>
                                     <div className="header">
                                         <div>Followings</div>
                                     </div>
                                     <div className="users w-full mt-4">
                                         {followingsData?.map((user, key) => (
-                                            <FollowersUserBox user={user} key={key}/>
+                                            <FollowersUserBox user={user} key={key} />
                                         ))}
                                     </div>
                                 </div>
