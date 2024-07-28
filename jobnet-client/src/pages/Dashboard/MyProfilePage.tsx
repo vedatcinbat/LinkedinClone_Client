@@ -5,6 +5,7 @@ import {RootState} from "@/redux/store.ts";
 import {fetchUserDataProfile} from "@/redux/user/userThunks.ts";
 import {Button} from "../../../components/ui/button.tsx";
 import {Link} from "react-router-dom";
+import { User } from "@/types/types.ts";
 import UserDetails from "@/components/profile/UserDetails.tsx";
 import UserPosts from "@/components/profile/UserPosts.tsx";
 import UserExperiences from "@/components/profile/UserExperiences.tsx";
